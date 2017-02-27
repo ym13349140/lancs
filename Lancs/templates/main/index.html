@@ -1,0 +1,236 @@
+{% extends 'base.html' %}
+
+{% block header_ext %}
+    <script src="//cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+{% endblock %}
+
+{% block content %}
+
+    <section class="swiper-container">
+        <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+            <!-- Indicators -->
+            <ol class="carousel-indicators">
+                <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+                <li data-target="#carousel-example-generic" data-slide-to="1"></li>
+                <li data-target="#carousel-example-generic" data-slide-to="2"></li>
+            </ol>
+
+            <!-- Wrapper for slides -->
+            <div class="carousel-inner" role="listbox">
+                <div class="item active">
+                    <img class="d-block img-fluid"
+                         src="{{ url_for('static', filename="images/carousel_1-min.jpg") }}" alt="图片1">
+                </div>
+                <div class="item">
+                    <img class="d-block img-fluid"
+                         src="{{ url_for('static', filename="images/carousel_2-min.jpg") }}" alt="图片2">
+                </div>
+                <div class="item">
+                    <img class="d-block img-fluid"
+                         src="{{ url_for('static', filename="images/carousel_3-min.jpg") }}" alt="图片3">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="dynamic-section ">
+        <div class="container">
+            <div class="text-line gray">
+                <h5><span>{{ _('Last News') }}</span>
+                    <div class="line"></div>
+                </h5>
+                <div class="subtitle">{{ _('Stay current with industry trends') }}</div>
+            </div>
+            <div class="dynamic-section-main row">
+                <div class="col-md-12">
+                    <div class="panel panel-default index-article">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">
+                                最新资讯
+                                <a class="more" href="#"><i class="es-icon es-icon-morehoriz"></i></a>
+                            </h3>
+                        </div>
+                        <div class="panel-body clearfix">
+                            <ul class="index-recommend-aricle clearfix">
+                                <li class="">
+                                    <a href="http://www.nscc-gz.cn/">
+                                        <img class="img-responsive"
+                                             src="{{ url_for('static', filename="images/1.jpg") }}">
+                                        <div class="image-overlay"></div>
+                                        <div class="title">国家超级计算广州中心</div>
+                                    </a>
+                                </li>
+                                <li class="last">
+                                    <a href="http://sdcs.sysu.edu.cn/">
+                                        <img class="img-responsive"
+                                             src="{{ url_for('static', filename="images/2.jpg") }}">
+                                        <div class="image-overlay"></div>
+                                        <div class="title">中山大学数据科学与计算机学院</div>
+                                    </a>
+                                </li>
+                            </ul>
+                            <ul class="index-new-article ">
+                                <li class=" clearfix"><i class="es-icon es-icon-dot color-primary mrs"></i><a class="link-dark" href="#" title="并行编程入门">学术报告：生命模拟与脉象分析新时代</a>
+                                    <span class="date">12-21</span>
+                                </li>
+
+                                <li class=" clearfix"><i class="es-icon es-icon-dot color-primary mrs"></i><a class="link-dark" href="#" title="添加资讯测试">学术报告：Deep supervision for deep learning : training, regularization, and multi-scale learning</a>
+                                    <span class="date">10-24</span>
+                                </li>
+
+                                <li class=" clearfix"><i class="es-icon es-icon-dot color-primary mrs"></i><a class="link-dark" href="#" title="C++ 编译过程">学术报告：密码技术在大数据中的应用简介、密码学中的可证明安全性</a>
+                                    <span class="date">10-21</span>
+                                </li>
+                                <li class=" clearfix"><i class="es-icon es-icon-dot color-primary mrs"></i><a class="link-dark" href="#" title="并行编程入门">学术报告：生命模拟与脉象分析新时代</a>
+                                    <span class="date">12-21</span>
+                                </li>
+
+                                <li class=" clearfix"><i class="es-icon es-icon-dot color-primary mrs"></i><a class="link-dark" href="#" title="添加资讯测试">学术报告：Deep supervision for deep learning : training, regularization, and multi-scale learning</a>
+                                    <span class="date">10-24</span>
+                                </li>
+
+                                <li class=" clearfix"><i class="es-icon es-icon-dot color-primary mrs"></i><a class="link-dark" href="#" title="C++ 编译过程">学术报告：密码技术在大数据中的应用简介、密码学中的可证明安全性</a>
+                                    <span class="date">10-21</span>
+                                </li>
+                                <li class=" clearfix"><i class="es-icon es-icon-dot color-primary mrs"></i><a class="link-dark" href="#" title="并行编程入门">学术报告：生命模拟与脉象分析新时代</a>
+                                    <span class="date">12-21</span>
+                                </li>
+
+                                <li class=" clearfix"><i class="es-icon es-icon-dot color-primary mrs"></i><a class="link-dark" href="#" title="添加资讯测试">学术报告：Deep supervision for deep learning : training, regularization, and multi-scale learning</a>
+                                    <span class="date">10-24</span>
+                                </li>
+
+                                <li class=" clearfix"><i class="es-icon es-icon-dot color-primary mrs"></i><a class="link-dark" href="#" title="C++ 编译过程">学术报告：密码技术在大数据中的应用简介、密码学中的可证明安全性</a>
+                                    <span class="date">10-21</span>
+                                </li>
+
+                                <li class=" clearfix"><i class="es-icon es-icon-dot color-primary mrs"></i><a class="link-dark" href="#" title="并行编程入门">学术报告：生命模拟与脉象分析新时代</a>
+                                    <span class="date">12-21</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="course-list-section open-course-list-section ">
+        <div class="container">
+            <div class="text-line">
+                <h5><span>{{ _('Researches and Projects') }}</span>
+                    <div class="line"></div>
+                </h5>
+                <div class="subtitle">{{ _('View the detail of projects') }}</div>
+            </div>
+
+            <div class="course-list">
+
+                <div class="col-lg-3 col-md-4 col-xs-6">
+                    <div class="course-item" style="padding-bottom: 10px">
+                        <div class="course-img">
+                            <a href="#" target="_blank" title="#">
+                                <img src="/static/images/project-1.png" alt="火灾模拟软件FDS的计算负载均衡优化" class="img-responsive">
+                            </a>
+                        </div>
+                        <div class="course-info">
+                            <div class="title">
+                                <a class="link-dark" href="#" target="_blank" title="火灾模拟软件FDS的计算负载均衡优化">
+                                    <strong>火灾模拟软件FDS的计算负载均衡优化</strong>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-md-4 col-xs-6">
+                    <div class="course-item" style="padding-bottom: 10px">
+                        <div class="course-img">
+                            <a href="#" target="_blank" title="#">
+                                <img src="/static/images/project-2.png" alt="Jacobi迭代并行优化" class="img-responsive">
+                            </a>
+                        </div>
+                        <div class="course-info">
+                            <div class="title">
+                                <a class="link-dark" href="#" target="_blank" title="Jacobi迭代并行优化">
+                                    <strong>Jacobi迭代并行优化</strong>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-md-4 col-xs-6">
+                    <div class="course-item" style="padding-bottom: 10px">
+                        <div class="course-img">
+                            <a href="#" target="_blank" title="#">
+                                <img src="/static/images/project-3.png" alt="基于MPI的矩阵相乘Summa算法实现" class="img-responsive">
+                            </a>
+                        </div>
+                        <div class="course-info">
+                            <div class="title">
+                                <a class="link-dark" href="#" target="_blank" title="基于MPI的矩阵相乘Summa算法实现">
+                                    <strong>基于MPI的矩阵相乘Summa算法实现</strong>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-md-4 col-xs-6">
+                    <div class="course-item" style="padding-bottom: 10px">
+                        <div class="course-img">
+                            <a href="#" target="_blank" title="#">
+                                <img src="/static/images/project-4.png" alt="图像连通区域标记并行算法" class="img-responsive">
+                            </a>
+                        </div>
+                        <div class="course-info">
+                            <div class="title">
+                                <a class="link-dark" href="#" target="_blank" title="图像连通区域标记并行算法">
+                                    <strong>图像连通区域标记并行算法</strong>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-md-4 col-xs-6">
+                    <div class="course-item" style="padding-bottom: 10px">
+                        <div class="course-img">
+                            <a href="#" target="_blank" title="#">
+                                <img src="/static/images/project-3.png" alt="基于MPI的矩阵相乘Summa算法实现" class="img-responsive">
+                            </a>
+                        </div>
+                        <div class="course-info">
+                            <div class="title">
+                                <a class="link-dark" href="#" target="_blank" title="基于MPI的矩阵相乘Summa算法实现">
+                                    <strong>基于MPI的矩阵相乘Summa算法实现</strong>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-md-4 col-xs-6">
+                    <div class="course-item" style="padding-bottom: 10px">
+                        <div class="course-img">
+                            <a href="#" target="_blank" title="#">
+                                <img src="/static/images/project-4.png" alt="图像连通区域标记并行算法" class="img-responsive">
+                            </a>
+                        </div>
+                        <div class="course-info">
+                            <div class="title">
+                                <a class="link-dark" href="#" target="_blank" title="图像连通区域标记并行算法">
+                                    <strong>图像连通区域标记并行算法</strong>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+        </div>
+        </div>
+    </section>
+
+
+{% endblock %}

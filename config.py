@@ -8,6 +8,11 @@ class Config:
     def __init__(self):
         pass
 
+    SQLALCHEMY_TRACK_MODIFICATIONS = True
+
+    BABEL_DEFAULT_LOCALE = 'zh'
+    BABEL_DEFAULT_TIMEZONE = 'CST'
+
     @staticmethod
     def init_app(app):
         pass

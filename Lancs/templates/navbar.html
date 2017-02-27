@@ -1,0 +1,63 @@
+<!-- 小屏幕下导航栏 -->
+<ul class="navbar-mobile visible-xs nav">
+    <li class="dropdown">
+        <a href="#" data-toggle="dropdown" class="navbar-more dropdown-toggle">
+            <i class="es-icon es-icon-menu"></i></a>
+        <ul class="dropdown-menu">
+            <li><a href="#">{{ _('About Us') }}</a></li>
+            <li><a href="#">{{ _('Team Member') }}</a></li>
+            <li><a href="#">{{ _('Research Direction') }}</a></li>
+            <li><a href="#">{{ _('Publications') }}</a></li>
+            <li><a href="#">{{ _('News Center') }}</a></li>
+            <li><a href="#">{{ _('Jobs Offer') }}</a></li>
+            <li><a href="#">{{ _('Contact') }}</a></li>
+        </ul>
+    </li>
+</ul>
+
+<!-- 大屏幕下导航栏 -->
+<header class="content-header navbar">
+
+    <div class="navbar-header">
+        <a href="{{ url_for('main.index') }}" class="navbar-brand">
+            <img src="{{ url_for('static', filename='images/logo.png') }}">
+        </a>
+    </div>
+
+    <ul class="navbar-user nav user-nav hidden-xs">
+        <li>
+            <a href="{{ url_for('user.signin', next=request.path) }}">{{ _('Sign In') }}</a>
+        </li>
+    </ul>
+
+    <nav class="collapse navbar-collapse">
+        <!-- 大屏幕下导航栏 -->
+        <ul class="nav navbar-nav clearfix visible-lg">
+            <li><a href="#">{{ _('About Us') }}</a></li>
+            <li><a href="#">{{ _('Team Member') }}</a></li>
+            <li><a href="#">{{ _('Research Direction') }}</a></li>
+            <li><a href="#">{{ _('Publications') }}</a></li>
+            <li><a href="#">{{ _('News Center') }}</a></li>
+            <li><a href="#">{{ _('Jobs Offer') }}</a></li>
+            <li><a href="#">{{ _('Contact') }}</a></li>
+        </ul>
+
+        <!-- 中屏幕下导航栏 -->
+        <ul class="nav navbar-nav clearfix visible-md visible-sm">
+            <li><a href="#">{{ _('About Us') }}</a></li>
+            <li><a href="#">{{ _('Team Member') }}</a></li>
+
+
+            <li class="nav-hover">
+                <a> <i class="es-icon es-icon-morehoriz"></i> </a>
+                <ul class="dropdown-menu" role="menu">
+                    <li><a href="#">{{ _('Research Direction') }}</a></li>
+                    <li><a href="#">{{ _('Publications') }}</a></li>
+                    <li><a href="#">{{ _('News Center') }}</a></li>
+                    <li><a href="#">{{ _('Jobs Offer') }}</a></li>
+                    <li><a href="#">{{ _('Contact') }}</a></li>
+                </ul>
+            </li>
+        </ul>
+    </nav>
+</header>

@@ -19,7 +19,7 @@ itsdangerous==0.24
 Jinja2==2.8
 Mako==1.0.4
 MarkupSafe==0.23
-mysql-python==1.2.3
+MySQL-python==1.2.3
 Naked==0.1.31
 packaging==16.8
 Pillow==3.3.1
