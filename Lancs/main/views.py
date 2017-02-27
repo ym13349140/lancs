@@ -10,6 +10,11 @@ def index():
     return render_template("main/index.html", title=gettext('Laboratory of Advanced Networking and Computing Systems'))
 
 
+@main.route('/about_us')
+def about_us():
+    return render_template("main/about_us.html", title=gettext('About Us'))
+
+
 @main.app_errorhandler(404)
 def page_404(err):
     return render_template('404.html', title='404'), 404

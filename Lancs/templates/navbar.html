@@ -4,7 +4,7 @@
         <a href="#" data-toggle="dropdown" class="navbar-more dropdown-toggle">
             <i class="es-icon es-icon-menu"></i></a>
         <ul class="dropdown-menu">
-            <li><a href="#">{{ _('About Us') }}</a></li>
+            <li><a href="{{ url_for('main.about_us') }}">{{ _('About Us') }}</a></li>
             <li><a href="#">{{ _('Team Member') }}</a></li>
             <li><a href="#">{{ _('Research Direction') }}</a></li>
             <li><a href="#">{{ _('Publications') }}</a></li>
@@ -25,15 +25,24 @@
     </div>
 
     <ul class="navbar-user nav user-nav hidden-xs">
+        {% if current_user.is_authenticated %}
+        <li>
+            <a href="{{ url_for('user.signout', next=request.path) }}">{{ _('Sign Out') }}</a>
+        </li>
+        {%  else %}
         <li>
             <a href="{{ url_for('user.signin', next=request.path) }}">{{ _('Sign In') }}</a>
+        </li>
+        {% endif %}
+        <li>
+            <a href="{{ url_for('admin.auth', next=request.path) }}">{{ _('Admin') }}</a>
         </li>
     </ul>
 
     <nav class="collapse navbar-collapse">
         <!-- 大屏幕下导航栏 -->
         <ul class="nav navbar-nav clearfix visible-lg">
-            <li><a href="#">{{ _('About Us') }}</a></li>
+            <li><a href="{{ url_for('main.about_us') }}">{{ _('About Us') }}</a></li>
             <li><a href="#">{{ _('Team Member') }}</a></li>
             <li><a href="#">{{ _('Research Direction') }}</a></li>
             <li><a href="#">{{ _('Publications') }}</a></li>
@@ -44,7 +53,7 @@
 
         <!-- 中屏幕下导航栏 -->
         <ul class="nav navbar-nav clearfix visible-md visible-sm">
-            <li><a href="#">{{ _('About Us') }}</a></li>
+            <li><a href="{{ url_for('main.about_us') }}">{{ _('About Us') }}</a></li>
             <li><a href="#">{{ _('Team Member') }}</a></li>
 
 

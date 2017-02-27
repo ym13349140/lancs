@@ -56,4 +56,18 @@ class User(UserMixin, db.Model):
 
 @login_manager.user_loader
 def load_user(user_id):
-    return User.get(user_id)
+    return User.query.get(user_id)
+
+""" 咨询信息
+@Article: 用来发布站点公告或者一些资讯、新闻信息。
+"""
+
+
+class Article(db.Model):
+    __tablename__ = "articles"
+    id = db.Column(db.Integer, primary_key=True)        # 资讯 ID
+    title = db.Column(db.String(128), nullable=False)   # 资讯标题
+    content = db.Column(db.Text(), nullable=False)      # 资讯正文
+    visitNum = db.Column(db.Integer, default=0)         # 浏览次数
+
+    updatedTime = db.Column(db.DateTime(), default=datetime.now)

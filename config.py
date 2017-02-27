@@ -8,6 +8,7 @@ class Config:
     def __init__(self):
         pass
 
+    SECRET_KEY = os.environ.get('SECRET_KEY') or '!@#$%^&*12345678'
     SQLALCHEMY_TRACK_MODIFICATIONS = True
 
     BABEL_DEFAULT_LOCALE = 'zh'
