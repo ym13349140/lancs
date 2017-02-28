@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="container article-detail-main" id="content-container">
+        <ol class="breadcrumb breadcrumb-o" style="margin-top:-18px">
+            <li><a href="/">首页</a></li>
+            <li><a href="{{ url_for('article.index') }}">新闻中心</a></li>
+            <li class="active">{{ article.title | truncate(30) }}</li>
+        </ol>
+
+        <section class="es-section article-content">
+
+            <div class="article-metas">
+                <div class="pull-left">
+                    <div class="date">
+                        <div class="day">{{ article.updatedTime.day }}</div>
+                        <div class="month">{{ article.updatedTime.month }}月</div>
+                    </div>
+                </div>
+                <div class="metas-body">
+                    <h2 class="title">{{ article.title }}</h2>
+                    <div class="sns">
+                        <span class="views-num"><i class="es-icon es-icon-visibility"></i>{{ article.visitNum }}</span>
+                    </div>
+                </div>
+            </div>
+            <div id="article-content" class="markdown-body article-text" data-to-render="{{ article.content }}"></div>
+        </section>
+    </div>
+{% endblock %}
+
+{% block footer_ext %}
+    <script src="{{ url_for('static', filename='js/simplemde.min.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='js/markdown_latex_support.js') }}"></script>
+    <script>
+        $(document).ready(function () {
+            var article_content = $("#article-content");
+            article_content.html(latex_support(article_content.data('to-render')));
+            article_content.attr('data-to-render', null);
+        });
+    </script>
+{% endblock %}

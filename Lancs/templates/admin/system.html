@@ -1,0 +1,37 @@
+{% extends 'admin/base.html' %}
+
+{% block content %}
+    <div id="content-container" class="container">
+        <section class="admin-list">
+            <div class="row">
+                <div class="col-sm-6 col-md-4">
+                    <div class="admin-item">
+                        <div class="info">发布与编辑新闻</div>
+                        <div class="bottom">
+                            <a class="btn btn-primary" href="{{ url_for('admin.article') }}" data-id="3">新闻中心管理</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-6 col-md-4">
+                    <div class="admin-item">
+                        <div class="info">发布与编辑招聘信息</div>
+                        <div class="bottom">
+                            <a class="btn btn-primary" href="#" data-id="3">招聘信息管理</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-6 col-md-4">
+                    <div class="admin-item">
+                        <div class="info">发布与编辑项目信息</div>
+                        <div class="bottom">
+                            <a class="btn btn-primary" href="#" data-id="3">项目信息管理</a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+    </div>
+{% endblock %}

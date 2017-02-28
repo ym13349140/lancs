@@ -24,11 +24,15 @@ def create_app(config_name):
     # Register all the filter.
     from .main import main as main_blueprint
     app.register_blueprint(main_blueprint)
+    from .util import filter_blueprint
+    app.register_blueprint(filter_blueprint)
     from .user import user as user_blueprint
     app.register_blueprint(user_blueprint, url_prefix='/user')
     from .article import article as article_blueprint
     app.register_blueprint(article_blueprint, url_prefix='/article')
     from .admin import admin as admin_blueprint
     app.register_blueprint(admin_blueprint, url_prefix='/admin')
+    from .markdown_files import markdown_files as markdown_files_blueprint
+    app.register_blueprint(markdown_files_blueprint, url_prefix='/markdown_files')
 
     return app
