@@ -1,0 +1,292 @@
+{% extends 'base.html' %}
+
+{% block header_ext %}
+    <link rel="stylesheet" type="text/css" href="http://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.2.0/fullcalendar.min.css">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename="js/jquery-ui-1.12.1.custom/jquery-ui.css") }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/bootstrap-datetimepicker.min.css') }}">
+
+    <script src="http://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="{{ url_for('static', filename="js/jquery-ui-1.12.1.custom/jquery-ui.js") }}"></script>
+    <script src="{{ url_for('static', filename="js/moment.js") }}"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.2.0/fullcalendar.min.js"></script>
+    <script src="{{ url_for('static', filename="js/datetimepicker/bootstrap-datetimepicker.min.js") }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename="js/datetimepicker/locales/bootstrap-datetimepicker.zh-CN.js") }}" charset="UTF-8"></script>
+{% endblock %}
+
+
+{% block content %}
+    <div id='calendar' style="width: 925px"></div>
+    <button class="btn btn-primary" id="new-conference">会议预约</button>
+    <div id="dialog-edit-content" title="会议预约" style="display: none">
+        <div class="panel-body">
+            <form class="form-horizontal" role="form">
+                <div class="form-group">
+                    <label class="col-sm-3 control-label">姓名</label>
+                    <div class="col-sm-9">
+                        <input type="text" class="form-control" name="name" title="预约人姓名" id="name">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-3 control-label">联系方式</label>
+                    <div class="col-sm-9">
+                        <input type="number" class="form-control" name="contact" title="预约人联系方式" id="contact">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-3 control-label">简介</label>
+                    <div class="col-sm-9">
+                        <input type="text" class="form-control" name="introduction" title="用途简介" id="introduction">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-3 control-label">开始时间</label>
+                    <div class="col-sm-9">
+                        <input type="text" class="form-control" name="start_time" title="开始时间" id="start_time" placeholder="点击以选择时间" readonly>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-3 control-label">结束时间</label>
+                    <div class="col-sm-9">
+                        <input type="text" class="form-control" name="end_time" title="结束时间" id="end_time" placeholder="请先选择开始时间" disabled readonly>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <script>
+        function p() {
+            var num = arguments.length;
+            var to_print = arguments[0];
+            for(var i=1;i<num;i++){
+                to_print += " " + arguments[i];
+            }
+            console.log(to_print);
+        }
+
+        $(document).ready(function() {
+            var now = new Date();
+            var oneDayLongTime = 24*60*60*1000;
+            var tomorrowTime = now.getTime() + oneDayLongTime;
+            var tomorrow = new Date(tomorrowTime);
+            tomorrow.setHours(7);
+            tomorrow.setMinutes(0);
+            tomorrow.setSeconds(0);
+            tomorrow.setMilliseconds(0);
+            var next6DayTime = tomorrow.getTime() + 5*oneDayLongTime;
+            var next6Day = new Date(next6DayTime);
+            next6Day.setHours(22);
+            next6Day.setMinutes(0);
+            next6Day.setSeconds(0);
+            next6Day.setMilliseconds(0);
+
+            var conferences = [[],[],[],[],[],[]];
+
+            $('#calendar').fullCalendar({
+                header: {
+                    left: 'title',
+                    center: false,
+                    right: 'agendaWeek,agendaDay'
+                },
+                defaultView: 'agendaWeek',
+                theme: true,
+                firstDay: now.getDay(),
+                allDaySlot: false,
+                slotLabelFormat: "HH:mm",
+                minTime: "07:00:00",
+                maxTime: "22:00:00",
+                timeFormat: "H:mm",
+
+                columnFormat: "M月D号 ddd",
+                titleFormat: "YYYY年 MMM月 D号",
+                monthNames: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12'],
+                monthNamesShort: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12'],
+                dayNames: ['星期日', '星期一', '星期二', '星期三', '星期四', '星期五', '星期六'],
+                dayNamesShort: ['星期日', '星期一', '星期二', '星期三', '星期四', '星期五', '星期六'],
+                eventClick: function (event, jsEvent, view) {
+
+                },
+                navLinks: true,
+                views: {
+                    agendaDay: {
+                        slotDuration: "00:10:00"
+                    }
+                },
+                events: "{{ url_for("conference.source") }}"
+            });
+
+            $('#dialog-edit-content').dialog({
+                autoOpen: false,
+                resizable: false,
+                height: "auto",
+                width: 500,
+                modal: true,
+                buttons: {
+                    "确定预约": function() {
+                        if($("#name").val() == ""){
+                            alert("预约人姓名不能为空");
+                            return;
+                        }
+                        if($("#contact").val() == ""){
+                            alert("联系方式不能为空");
+                            return;
+                        }
+                        if($("#start_time").val() == ""){
+                            alert("开始时间不能为空");
+                            return;
+                        }
+                        if($("#end_time").val() == ""){
+                            alert("结束时间不能为空");
+                            return;
+                        }
+
+                        var event = {
+                            title: "hehe",
+                            start: $("#start_time").val(),
+                            end: $("#end_time").val()
+                        };
+
+                        $("#calendar").fullCalendar("renderEvent", event);
+                        $( this ).dialog("close");
+                        $("#end_time").attr("disabled", "disabled");
+                        $("#end_time").attr("placeholder", "请先选择开始时间");
+                        $("#name").val("");
+                        $("#contact").val("");
+                        $("#introduction").val("");
+                        $("#start_time").val("");
+                        $("#end_time").val("");
+                    },
+                    "取消": function() {
+                        $( this ).dialog("close");
+                        $("#end_time").attr("disabled", "disabled");
+                        $("#end_time").attr("placeholder", "请先选择开始时间");
+                        $("#name").val("");
+                        $("#contact").val("");
+                        $("#introduction").val("");
+                        $("#start_time").val("");
+                        $("#end_time").val("");
+                    }
+                }
+            });
+
+            $("#end_time").datetimepicker({
+                format: "yyyy-mm-dd hh:ii",
+                todayHighlight: true,
+                startView: 1,
+                maxView: 1,
+                language: "zh-CN",
+                autoclose: true,
+
+                onRenderHour: function(date){
+                    if (date.getUTCHours() < 7 || date.getUTCHours() > 22){
+                        return ['disabled'];
+                    }
+                }
+            });
+            $("#start_time").datetimepicker({
+                format: "yyyy-mm-dd hh:ii",
+                todayHighlight: true,
+                startView: 2,
+                maxView: 2,
+                language: "zh-CN",
+                weekStart: 0,
+                autoclose: true,
+                startDate: tomorrow,
+                endDate: next6Day,
+                onRenderHour: function(date){
+                    if (date.getUTCHours()< 7 || date.getUTCHours()> 22){
+                        return ['disabled'];
+                    }
+
+                    var temp = conferences[(date.getUTCDay() - tomorrow.getDay() + 7) % 7];
+                    for(var i=0;i<temp.length;i++){
+                        var start = new Date(temp[i].start);
+                        var end = new Date(temp[i].end);
+                        //p(start, date, end);
+                        console.log(start, date,start.getUTCHours(), date.getUTCHours(), end.getUTCHours());
+                        if(date.getTime() >= start.getTime() && date.getTime() < end.getTime() && date.getUTCHours() >= start.getUTCHours() && date.getUTCHours() < end.getUTCHours()){
+                            return ['disabled'];
+                        }
+                    }
+                },
+                onRenderMinute: function (date) {
+                    var exist_conferences = $('#calendar').fullCalendar('clientEvents');
+                    for(var i=0;i<exist_conferences.length;i++){
+                        var start = new Date(exist_conferences[i].start);
+                        var end = new Date(exist_conferences[i].end);
+                        if(date >= start && date < end){
+                            return ['disabled'];
+                        }
+                    }
+                }
+            });
+            var hasChoose = false;
+            $("#start_time").change(function () {
+                var start_date = new Date($(this).val());
+
+                if(!hasChoose){
+                    $("#end_time").removeAttr("disabled");
+                    $("#end_time").attr("placeholder", "点击以选择结束时间");
+                    hasChoose == true;
+                }
+                var exist_conferences = $('#calendar').fullCalendar('clientEvents');
+
+                exist_conferences.sort(function (a,b) {
+                    return new Date(a.start) > new Date(b.start);
+                });
+
+                var end_date = new Date(start_date);
+                end_date.setHours(22);
+                end_date.setMinutes(0);
+                end_date.setSeconds(0);
+                end_date.setMilliseconds(0);
+
+                for(var i=0;i<exist_conferences.length;i++){
+                    var temp = new Date(exist_conferences[i].start.valueOf() + 60*1000*now.getTimezoneOffset());
+                    if(temp.getUTCDate() == start_date.getUTCDate() && temp > start_date){
+                        end_date = temp;
+                        break;
+                    }
+                    if(temp.getUTCDate() != start_date.getUTCDate() && temp > start_date){
+                        break;
+                    }
+                }
+
+                $("#end_time").datetimepicker("setStartDate", start_date);
+                $("#end_time").datetimepicker("setEndDate", end_date);
+            });
+
+            $("#new-conference").click(function(){
+                $("#dialog-edit-content").dialog('open');
+                for(var i=0;i<conferences.length;i++){
+                    var exist_conferences = $('#calendar').fullCalendar('clientEvents', function (event) {
+                        var temp = new Date(event.start + 60*1000*now.getTimezoneOffset());
+                        return temp.getDay() == (tomorrow.getDay() + i) % 7;
+                    });
+                    conferences[i] = exist_conferences.slice();
+                    conferences[i].sort(function (a,b) {
+                        return new Date(a.start) > new Date(b.start);
+                    });
+                }
+
+                for(i=0;i<conferences.length;i++){
+                    var temp = [];
+                    temp.push(conferences[i][0]);
+                    for(var j=1,k=0;j<conferences[i].length;j++){
+                        var cur_end = new Date(temp[k].end);
+                        var next_start = new Date(conferences[i][j].start);
+                        if(cur_end.getTime() == next_start.getTime()){
+                            temp[k].end = conferences[i][j].end;
+                        }
+                        else{
+                            temp.push(conferences[i][j]);
+                            k++;
+                        }
+                    }
+                    conferences[i] = temp;
+                }
+            });
+        });
+    </script>
+{% endblock %}
+
+
