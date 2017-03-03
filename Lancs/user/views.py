@@ -44,13 +44,12 @@ def reg():
             reg_user = User(username=username, email=email, password=password)
             db.session.add(reg_user)
             db.session.commit()
-            login_user(reg_user)
 
             token = reg_user.generate_reset_token()
             send_email(reg_user.email, 'Confirm Your Email',
                        'user/register_email',
                        user=reg_user, token=token)
-            return render_template('user/register_sent.html')
+            return render_template('user/register_sent.html', title=gettext('Mail has been sent'))
 
 
 @user.route('/register/<token>')
