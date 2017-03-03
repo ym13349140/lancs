@@ -2,21 +2,33 @@
 
 {% block header_ext %}
     <link rel="stylesheet" type="text/css" href="http://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.2.0/fullcalendar.min.css">
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename="js/jquery-ui-1.12.1.custom/jquery-ui.css") }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename="js/jquery-ui-1.12.1.custom/jquery-ui.min.css") }}">
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/bootstrap-datetimepicker.min.css') }}">
+    <link href="http://cdn.bootcss.com/qtip2/3.0.3/jquery.qtip.min.css" rel="stylesheet">
 
     <script src="http://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <script src="{{ url_for('static', filename="js/jquery-ui-1.12.1.custom/jquery-ui.js") }}"></script>
+    <script src="{{ url_for('static', filename="js/jquery-ui-1.12.1.custom/jquery-ui.min.js") }}"></script>
     <script src="{{ url_for('static', filename="js/moment.js") }}"></script>
     <script src="http://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.2.0/fullcalendar.min.js"></script>
     <script src="{{ url_for('static', filename="js/datetimepicker/bootstrap-datetimepicker.min.js") }}"></script>
     <script type="text/javascript" src="{{ url_for('static', filename="js/datetimepicker/locales/bootstrap-datetimepicker.zh-CN.js") }}" charset="UTF-8"></script>
+    <script src="http://cdn.bootcss.com/qtip2/3.0.3/jquery.qtip.min.js"></script>
 {% endblock %}
 
 
 {% block content %}
-    <div id='calendar' style="width: 925px"></div>
-    <button class="btn btn-primary" id="new-conference">会议预约</button>
+
+    <div class="container" style="margin-top: 10px">
+        <div class="panel">
+            <div class="panel-body">
+                <div id='calendar'></div>
+            </div>
+            <div class="panel-body">
+                <button class="btn btn-primary" id="new-conference">会议预约</button>
+            </div>
+        </div>
+    </div>
+
     <div id="dialog-edit-content" title="会议预约" style="display: none">
         <div class="panel-body">
             <form class="form-horizontal" role="form">
@@ -53,6 +65,7 @@
             </form>
         </div>
     </div>
+
     <script>
         function p() {
             var num = arguments.length;
@@ -82,6 +95,7 @@
             var conferences = [[],[],[],[],[],[]];
 
             $('#calendar').fullCalendar({
+                height: 730,
                 header: {
                     left: 'title',
                     center: false,
@@ -102,18 +116,99 @@
                 monthNamesShort: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12'],
                 dayNames: ['星期日', '星期一', '星期二', '星期三', '星期四', '星期五', '星期六'],
                 dayNamesShort: ['星期日', '星期一', '星期二', '星期三', '星期四', '星期五', '星期六'],
-                eventClick: function (event, jsEvent, view) {
-
-                },
                 navLinks: true,
                 views: {
                     agendaDay: {
                         slotDuration: "00:10:00"
                     }
                 },
-                events: "{{ url_for("conference.source") }}"
+                events: function (start, end, timezone, callback) {
+                    $.ajax({
+                        url: "{{ url_for("conference.process") }}",
+                        type: "post",
+                        data: {
+                            op: "get conferences"
+                        },
+                        success: function (data) {
+                            if(data["status"] == "success"){
+                                var events = data["conference"];
+                                callback(events);
+                            }
+                            else if(data["status"] == "need login"){
+                                alert("请登录");
+                                location.reload();
+                            }
+                        }
+                    })
+                },
+                eventAfterRender: function(calEvent, element, view) {
+                    element.qtip({
+                        prerender: true,
+                        style: {
+                            width: 200
+                        },
+                        content: {
+                            title: calEvent.start.format("HH:mm") + " - " + calEvent.end.format("HH:mm"),
+                            text: "<div><br>" +
+                                    "<label style='font-size: 13px;margin-bottom: 7px;color: #87c346'>状态: " + calEvent.status + "</label><br>" +
+                                    "<label style='font-size: 13px;margin-bottom: 7px'>预约人: " + calEvent.name + "</label><br>" +
+                                    "<label style='font-size: 13px;margin-bottom: 7px'>联系方式: " + calEvent.contact + "</label><br>" +
+                                    "<label style='font-size: 13px;margin-bottom: 7px'>简介: </label><br>" +
+                                    "<div style='font-size: 13px;line-height:20px'>" +
+                                        "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" + calEvent.introduction +
+                                    "</div><br>" +
+                                    "<button class='btn btn-primary pull-right' style='height: 30px;line-height: 0px' disabled>删除</button><br>"+
+                                  "</div>"
+                        },
+                        position: {
+                            target: 'mouse',
+                            adjust: {
+                                mouse: false
+                            }
+                        },
+                        show: {
+                            effect: function() {
+                                $(this).fadeIn(300);
+                            },
+                            solo: true,
+                            event: 'click'
+                        },
+                        hide: {
+                            effect: function() {
+                                $(this).slideUp(300);
+                            },
+                            solo: false,
+                            delay: 5000,
+                            event: "unfocus"
+                        },
+                        events: {
+                            render: function(event, api) {
+                                if(calEvent.deletable == "true"){
+                                    $(event.target).find("button").removeAttr("disabled");
+                                    $(event.target).find("button").click(function () {
+                                        $.ajax({
+                                            url: "{{ url_for("conference.process") }}",
+                                            type: "post",
+                                            data:{
+                                                op: "delete conference",
+                                                conference_id: calEvent.id
+                                            },
+                                            success: function (data) {
+                                                if(data["status"] == "success"){
+                                                    location.reload();
+                                                }
+                                                else if(data["status"] == "not your conference"){
+                                                    alert("该预约非您创建");
+                                                }
+                                            }
+                                        })
+                                    });
+                                }
+                            }
+                        }
+                    });
+                }
             });
-
             $('#dialog-edit-content').dialog({
                 autoOpen: false,
                 resizable: false,
@@ -138,14 +233,31 @@
                             alert("结束时间不能为空");
                             return;
                         }
+                        if($("#start_time").val() == $("#end_time").val()){
+                            alert("开始时间不能等于结束时间");
+                            return;
+                        }
 
-                        var event = {
-                            title: "hehe",
-                            start: $("#start_time").val(),
-                            end: $("#end_time").val()
-                        };
-
-                        $("#calendar").fullCalendar("renderEvent", event);
+                        $.ajax({
+                            url: "{{ url_for("conference.process") }}",
+                            type: "post",
+                            data: {
+                                op: "add conference",
+                                name: $("#name").val(),
+                                contact: $("#contact").val(),
+                                introduction: $("#introduction").val(),
+                                start_time: $("#start_time").val(),
+                                end_time: $("#end_time").val()
+                            },
+                            success: function (data) {
+                                if(data["status"] == "success"){
+                                    location.reload();
+                                }
+                                else if(data["status"] == "arguments error"){
+                                    alert("参数错误");
+                                }
+                            }
+                        });
                         $( this ).dialog("close");
                         $("#end_time").attr("disabled", "disabled");
                         $("#end_time").attr("placeholder", "请先选择开始时间");
@@ -193,7 +305,7 @@
                 startDate: tomorrow,
                 endDate: next6Day,
                 onRenderHour: function(date){
-                    if (date.getUTCHours()< 7 || date.getUTCHours()> 22){
+                    if (date.getUTCHours()< 7 || date.getUTCHours()> 21){
                         return ['disabled'];
                     }
 
@@ -201,8 +313,6 @@
                     for(var i=0;i<temp.length;i++){
                         var start = new Date(temp[i].start);
                         var end = new Date(temp[i].end);
-                        //p(start, date, end);
-                        console.log(start, date,start.getUTCHours(), date.getUTCHours(), end.getUTCHours());
                         if(date.getTime() >= start.getTime() && date.getTime() < end.getTime() && date.getUTCHours() >= start.getUTCHours() && date.getUTCHours() < end.getUTCHours()){
                             return ['disabled'];
                         }
@@ -222,6 +332,7 @@
             var hasChoose = false;
             $("#start_time").change(function () {
                 var start_date = new Date($(this).val());
+                start_date = new Date(start_date.getTime() + 5*60*1000);
 
                 if(!hasChoose){
                     $("#end_time").removeAttr("disabled");
@@ -270,16 +381,18 @@
 
                 for(i=0;i<conferences.length;i++){
                     var temp = [];
-                    temp.push(conferences[i][0]);
-                    for(var j=1,k=0;j<conferences[i].length;j++){
-                        var cur_end = new Date(temp[k].end);
-                        var next_start = new Date(conferences[i][j].start);
-                        if(cur_end.getTime() == next_start.getTime()){
-                            temp[k].end = conferences[i][j].end;
-                        }
-                        else{
-                            temp.push(conferences[i][j]);
-                            k++;
+                    if(conferences[i].length > 0 ){
+                        temp.push(conferences[i][0]);
+                        for(var j=1,k=0;j<conferences[i].length;j++){
+                            var cur_end = new Date(temp[k].end);
+                            var next_start = new Date(conferences[i][j].start);
+                            if(cur_end.getTime() == next_start.getTime()){
+                                temp[k].end = conferences[i][j].end;
+                            }
+                            else{
+                                temp.push(conferences[i][j]);
+                                k++;
+                            }
                         }
                     }
                     conferences[i] = temp;

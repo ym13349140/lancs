@@ -26,6 +26,8 @@ class User(UserMixin, db.Model):
     avatar_url = db.Column(db.String(128),
                            default="http://www.gravatar.com/avatar/")
 
+    conferences = db.relationship('Conference', backref='user', lazy='dynamic')
+
     @property
     def password(self):
         raise AttributeError('password is not a readable attribute')
@@ -72,3 +74,20 @@ class Article(db.Model):
     message_type = db.Column(db.Integer, default=0, nullable=False)  # 消息类型：0代表普通资讯，1代表招聘信息
 
     updatedTime = db.Column(db.DateTime(), default=datetime.now)
+
+
+""" 会议预约
+@Conference: 会议记录类，用于储存会议基本信息
+"""
+
+
+class Conference(db.Model):
+    __tablename__ = "conferences"
+    id = db.Column(db.Integer, primary_key=True)    # 会议记录ID
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'))  # 预约帐号ID
+    name = db.Column(db.String(128), nullable=False)    # 预约人姓名
+    contact = db.Column(db.String(20), nullable=False)  # 预约人联系电话
+    introduction = db.Column(db.String(256), default=None)  # 会议内容简介
+    start_time = db.Column(db.DateTime(), nullable=None)    # 会议开始日期时间
+    end_time = db.Column(db.DateTime(), nullable=None)      # 会议结束时间
+
