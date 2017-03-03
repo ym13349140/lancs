@@ -36,5 +36,7 @@ def create_app(config_name):
     app.register_blueprint(markdown_files_blueprint, url_prefix='/markdown_files')
     from .conference import conference as conference_blueprint
     app.register_blueprint(conference_blueprint, url_prefix='/conference')
+    from .job import job as job_blueprint
+    app.register_blueprint(job_blueprint, url_prefix='/job')
 
     return app

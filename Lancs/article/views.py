@@ -10,8 +10,10 @@ from .. import db
 
 @article.route('/')
 def index():
-    article_list = Article.query.all()
-    return render_template('article/index.html', title=gettext('Articles'), article_list=article_list)
+    article_list = Article.query.order_by(Article.updatedTime.desc()).filter_by(message_type=0)  # 只展示非招聘类的新闻列表
+    return render_template('article/index.html',
+                           title=gettext('Articles'),
+                           article_list=article_list)
 
 
 @article.route('/<int:article_id>')

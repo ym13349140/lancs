@@ -56,7 +56,7 @@ def index():
 @admin.route('/articles/')
 @admin_login
 def article():
-    articles = Article.query.all()
+    articles = Article.query.filter_by(message_type=0)  # 非招聘类资讯
     return render_template('admin/article/index.html',
                            title=gettext('Articles Admin'),
                            articles=articles)
@@ -101,3 +101,50 @@ def article_delete():
     db.session.delete(cur_article)
     db.session.commit()
     return jsonify(status="success", del_article_id=cur_article.id)
+
+
+'''
+招聘信息管理
+由于与资讯管理的模型结构相同，因此管理模块也耦合在一起
+'''
+
+
+@admin.route('/jobs/')
+@admin_login
+def job():
+    articles = Article.query.filter_by(message_type=1)  # 招聘类资讯
+    return render_template('admin/article/job_index.html',
+                           title=gettext('Jobs Admin'),
+                           articles=articles)
+
+
+@admin.route('/jobs/create/', methods=['POST', 'GET'])
+@admin_login
+def job_create():
+    if request.method == 'GET':
+        return render_template('admin/article/job_create.html', title=gettext('Create Jobs'))
+    if request.method == 'POST':
+        title = request.form['title']
+        content = request.form['content']
+        new_article = Article(title=title, content=content, message_type=1)  # 招聘类资讯
+        db.session.add(new_article)
+        db.session.commit()
+        return redirect(url_for('admin.job'))
+
+
+@admin.route('/jobs/<int:aid>/edit/', methods=['POST', 'GET'])
+@admin_login
+def job_edit(aid):
+    cur_article = Article.query.filter_by(id=aid).first_or_404()
+    if request.method == "GET":
+        return render_template('admin/article/job_edit.html',
+                               title=cur_article.title,
+                               article=cur_article)
+    elif request.method == "POST":
+        title = request.form['title']
+        content = request.form['content']
+        cur_article.title = title
+        cur_article.content = content
+        cur_article.updatedTime = datetime.now()
+        db.session.commit()
+        return redirect(url_for('admin.job'))

@@ -7,7 +7,9 @@ from itsdangerous import TimedJSONWebSignatureSerializer as Serializer
 from flask import current_app
 from . import db, login_manager
 
-""" 用户管理模块 """
+""" 用户管理
+@User:用户登录、注册、认证邮箱等
+"""
 
 
 class User(UserMixin, db.Model):
