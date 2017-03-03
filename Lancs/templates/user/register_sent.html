@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block title %}{{ _('Register email has been sent') }}{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h2 class="text-center text-success" style="margin-bottom:1em"> {{ _('Send confirm email') }} </h2>
+    <p class="text-center">
+        我们已经向您的发送了一封带有确认您邮箱的链接的邮件，请及时查看。
+        {{ _('We have sent a email to you, with a link which will confirm your mail address. please see it in time') }}
+        </br>
+        </br>
+        </br>
+    </p>
+</div>
+{% endblock %}

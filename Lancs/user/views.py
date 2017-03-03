@@ -4,6 +4,7 @@ from flask import render_template, redirect, request, url_for, current_app, abor
 from flask_login import login_user, logout_user, current_user, login_required
 from datetime import datetime
 from flask_babel import gettext
+from ..util.email import send_email
 from . import user
 from ..models import User
 from .. import db
@@ -45,8 +46,20 @@ def reg():
             db.session.commit()
             login_user(reg_user)
 
-            # TODO, Confirm the email.
-            return redirect(request.args.get('next') or url_for('main.index'))
+            token = reg_user.generate_reset_token()
+            send_email(reg_user.email, 'Confirm Your Email',
+                       'user/register_email',
+                       user=reg_user, token=token)
+            return render_template('user/register_sent.html')
+
+
+@user.route('/register/<token>')
+def reg_confirm(token):
+    reg_user = User.verify_token(token)
+    reg_user.is_valid_registered = True
+    db.session.commit()
+    login_user(reg_user)
+    return redirect(request.args.get('next') or url_for('main.index'))
 
 
 @user.route('/signin/', methods=['GET', 'POST'])

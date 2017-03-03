@@ -15,6 +15,15 @@ class Config:
     BABEL_DEFAULT_LOCALE = 'zh'
     BABEL_DEFAULT_TIMEZONE = 'CST'
 
+    # If use QQ email, please see http://service.mail.qq.com/cgi-bin/help?id=28 firstly.
+    MAIL_SERVER = 'smtp.sina.com'
+    MAIL_PORT = 465
+    MAIL_USE_SSL = True
+    MAIL_USERNAME = os.environ.get('MAIL_USERNAME') or 'milanlanlanlan@sina.com'
+    MAIL_PASSWORD = os.environ.get('MAIL_PASSWORD') or '1970025901a'
+    FORUM_MAIL_SUBJECT_PREFIX = 'LANCS'
+    FORUM_MAIL_SENDER = '<milanlanlanlan@sina.com>'
+
     # 这个路径用来保存 Markdown 编辑框拖拽上传的文件
     MD_UPLOAD_IMG = 'static/upload/md_images/'
     IMAGES_FOLDER = os.path.join(basedir, 'Lancs/', MD_UPLOAD_IMG)
