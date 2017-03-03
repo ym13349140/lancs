@@ -1,0 +1,75 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="container article-detail-main" id="content-container">
+        <section class="es-section article-content">
+            <div class="article-metas">
+                <div class="pull-left">
+                    <div class="date">
+                        <div class="day">近期</div>
+                        <div class="month">著作</div>
+                    </div>
+                </div>
+                <div class="metas-body">
+                    <h2 class="title">{{ _('Publications') }}</h2>
+                    <div class="sns">
+
+                    </div>
+                </div>
+            </div>
+            <br/>
+            <div id="article-content" class="markdown-body article-text" data-to-render="![](/static/upload/md_images/20170303104324.png)
+### Journal Article
+- HELOS: Heterogeneous Load Scheduling for Electric Vehicle-integrated Microgrids
+Gaoxiang Li*, Di Wu, Jiefeng Hu, Yong Li, M. Shamim Hossain and Ahmed Ghoneim. In IEEE Transactions on Vehicular Technology (IEEE TVT), In press, 2017. (Corresponding Author)
+- Cache Behavior Characterization and Validation over Large-scale Video Data
+Jiaqiang Liu, Huan Yan, Yong Li, Di Wu, Li Su and Depeng Jin. In IEEE Transactions on Circuits and Systems for Video Technology (IEEE TCSVT), In press, 2017.
+- Opportunistic Task Scheduling over Co-Located Clouds in Mobile Environment
+Min Chen, Yixue Hao, Di Wu, Yong Li, Kai Hwang. In IEEE Transactions on Services Computing (IEEE TSC), In press, 2017.
+- Online Cloud Transcoding and Distribution for Crowdsourced Live Game Video Streaming
+Yuanhuan Zheng*, Di Wu, Yihao Ke*, Can Yang, Min Chen, and Guoqing Zhang. In IEEE Transactions on Circuits and Systems for Video Technology (IEEE TCSVT), In press, 2017. (Corresponding Author)
+- Measuring and Analyzing Third-party Mobile Game App Stores in China
+Tingting Wang*, Di Wu, Jiaming Zhang*, Min Chen, Yipeng Zhou, In IEEE Transactions on Network and Service Management (IEEE TNSM), Volume 13, Issue 4, pages 793-805, Dec. 2016. (Corresponding Author)
+- Efficient Upstream Bandwidth Multiplexing for Cloud Video Recording Services
+Jian He*, Di Wu, Xueyan Xie*, Min Chen, Yong Li and Guoqing Zhang. In IEEE Transactions on Circuits and Systems for Video Technology (IEEE TCSVT), Volume 26, Issue 10, pages 1893 - 1906 , Oct. 2016. (Corresponding Author)
+- Toward Cost-Effective Mobile Video Streaming via Smart Cache with Adaptive Thresholding
+Di Wu, Jian Huang*, Jian He*, Min Chen, and Guoqing Zhang. In IEEE Transactions on Broadcasting (IEEE TBC), Volume 61, Issue 4, pages 639-650, Dec. 2015. (Corresponding Author)
+- On Achieving Cost-Effective Adaptive Cloud Gaming in Geo-distributed Data Centers
+Hao Tian*, Di Wu, Jian He*, Yuedong Xu, and Min Chen. In IEEE Transactions on Circuits and Systems for Video Technology (IEEE TCSVT), Volume 25, Issue 12, pages 2064-2077, Dec. 2015. (Corresponding Author)
+- Playing High-End Video Games in the Cloud: A Measurement Study
+Zheng Xue*, Di Wu, Jian He*, Xiaojun Hei, and Yong Liu. In IEEE Transactions on Circuits and Systems for Video Technology (IEEE TCSVT), Volume 25, Issue 12, pages 2013-2025, Dec. 2015. (Corresponding Author)
+- Eco-Aware Online Power Management and Load Scheduling for Green Cloud Datacenters
+Xiang Deng*, Di Wu, Junfeng Shen* and Jian He*. In IEEE Systems Journal (IEEE JSYST), In press, 2015. (Corresponding Author)
+- On the Computation Offloading at Ad Hoc Cloudlet: Architecture and Service Modes
+Min Chen, Yixue Hao, Yong Li, Chin-Feng Lai, and Di Wu. In IEEE Communications Magazine (IEEE COMMAG), Vol. 53, No. 6, pp. 18-24, June 2015. (ESI Highly Cited Paper)
+- SmartGW: Enabling Bandwidth-Efficient Group Watching in Cloud Social TV Systems
+Zheng Xue*, Di Wu, Xueyan Xie*, and Yonggang Wen. In ACM/Springer Mobile Networks and Applications (ACM/Springer MONET), Volume 20, Issue 3, Page 308-319, Jun 2015. (Corresponding Author)
+
+### Conference Article
+- iCloudAccess: Cost-Effective Streaming of Video Games from the Cloud with Low Latency
+Di Wu, Zheng Xue* and Jian He*. In IEEE Transactions on Circuits and Systems for Video Technology (IEEE TCSVT), Volume 24, Issue 8, Pages 1405 - 1416, Aug. 2014. Popular Articles of IEEE TCSVT (among the Top 50 most frequently downloaded articles for IEEE TCSVT, Sep 2014, Feb 2015)
+- On the Cost-QoE Trade-off for Cloud-based Video Streaming under Amazon EC2&#39;s Pricing Models
+Jian He*, Yonggang Wen, Jianwei Huang and Di Wu, In IEEE Transactions on Circuits and Systems for Video Technology (IEEE TCSVT), Volume 24, Issue 4, Pages 669 - 680, Apr. 2014. (Corresponding Author)
+- CBM: Online Strategies on Cost-aware Buffer Management for Mobile Video Streaming
+Jian He*, Zheng Xue*, Di Wu, Dapeng Oliver Wu, and Yonggang Wen. In IEEE Transactions on Multimedia (IEEE TMM), Volume 16, Issue 1, Pages 242 - 252, Jan. 2014. (Corresponding Author)
+- Toward Optimal Deployment of Cloud-Assisted Video Distribution Services
+Jian He*, Di Wu, Yupeng Zeng*, Xiaojun Hei, and Yonggang Wen. In IEEE Transactions on Circuits and Systems for Video Technology (IEEE TCSVT), Volume 23, Issue 10, Pages 1717 - 1728, Oct. 2013. (Corresponding Author)
+- Balancing Performance and Fairness in P2P Live Video Systems
+Di Wu, Yi Liang*, Jian He*, and Xiaojun Hei. In IEEE Transactions on Circuits and Systems for Video Technology (IEEE TCSVT), Volume 23, Issue 6, Pages 1029 - 1039, June 2013.
+- Unraveling the BitTorrent Ecosystem
+Chao Zhang, Prithula Dhungel, Di Wu and Keith W. Ross. In IEEE Transactions on Parallel and Distributed Systems (IEEE TPDS), Volume 22, Issue 7, Pages 1164 - 1177, July 2011."></div>
+        </section>
+    </div>
+{% endblock %}
+
+{% block footer_ext %}
+    <script src="{{ url_for('static', filename='js/simplemde.min.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='js/markdown_latex_support.js') }}"></script>
+    <script>
+        $(document).ready(function () {
+            var article_content = $("#article-content");
+            article_content.html(latex_support(article_content.data('to-render')));
+            article_content.attr('data-to-render', null);
+        });
+    </script>
+{% endblock %}

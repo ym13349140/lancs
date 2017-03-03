@@ -6,10 +6,10 @@
         <ul class="dropdown-menu">
             <li><a href="{{ url_for('main.about_us') }}">{{ _('About Us') }}</a></li>
             <li><a href="#">{{ _('Team Member') }}</a></li>
-            <li><a href="#">{{ _('Publications') }}</a></li>
+            <li><a href="{{ url_for('main.publications') }}">{{ _('Publications') }}</a></li>
             <li><a href="{{ url_for('article.index') }}">{{ _('News Center') }}</a></li>
             <li><a href="#">{{ _('Jobs Offer') }}</a></li>
-            <li><a href="#">{{ _('Contact') }}</a></li>
+            <li><a href="{{ url_for('main.contact_us') }}">{{ _('Contact') }}</a></li>
         </ul>
     </li>
 </ul>
@@ -43,10 +43,10 @@
         <ul class="nav navbar-nav clearfix visible-lg">
             <li><a href="{{ url_for('main.about_us') }}">{{ _('About Us') }}</a></li>
             <li><a href="#">{{ _('Team Member') }}</a></li>
-            <li><a href="#">{{ _('Publications') }}</a></li>
+            <li><a href="{{ url_for('main.publications') }}">{{ _('Publications') }}</a></li>
             <li><a href="{{ url_for('article.index') }}">{{ _('News Center') }}</a></li>
             <li><a href="#">{{ _('Jobs Offer') }}</a></li>
-            <li><a href="#">{{ _('Contact') }}</a></li>
+            <li><a href="{{ url_for('main.contact_us') }}">{{ _('Contact') }}</a></li>
         </ul>
 
         <!-- 中屏幕下导航栏 -->
@@ -58,10 +58,10 @@
             <li class="nav-hover">
                 <a> <i class="es-icon es-icon-morehoriz"></i> </a>
                 <ul class="dropdown-menu" role="menu">
-                    <li><a href="#">{{ _('Publications') }}</a></li>
+                    <li><a href="{{ url_for('main.publications') }}">{{ _('Publications') }}</a></li>
                     <li><a href="{{ url_for('article.index') }}">{{ _('News Center') }}</a></li>
                     <li><a href="#">{{ _('Jobs Offer') }}</a></li>
-                    <li><a href="#">{{ _('Contact') }}</a></li>
+                    <li><a href="{{ url_for('main.contact_us') }}">{{ _('Contact') }}</a></li>
                 </ul>
             </li>
         </ul>
