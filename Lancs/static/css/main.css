@@ -4787,3 +4787,8 @@ div.no-margin {
     width: 161px;
     height: 161px;
 }
+
+/* fullCalendar event点击时鼠标类型 */
+.fullcalendar-event-cursor-pointer{
+    cursor: pointer;
+}
