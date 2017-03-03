@@ -5,7 +5,7 @@
             <i class="es-icon es-icon-menu"></i></a>
         <ul class="dropdown-menu">
             <li><a href="{{ url_for('main.about_us') }}">{{ _('About Us') }}</a></li>
-            <li><a href="#">{{ _('Team Member') }}</a></li>
+            <li><a href="{{ url_for('main.team') }}">{{ _('Team Member') }}</a></li>
             <li><a href="{{ url_for('main.publications') }}">{{ _('Publications') }}</a></li>
             <li><a href="{{ url_for('article.index') }}">{{ _('News Center') }}</a></li>
             <li><a href="#">{{ _('Jobs Offer') }}</a></li>
@@ -42,7 +42,7 @@
         <!-- 大屏幕下导航栏 -->
         <ul class="nav navbar-nav clearfix visible-lg">
             <li><a href="{{ url_for('main.about_us') }}">{{ _('About Us') }}</a></li>
-            <li><a href="#">{{ _('Team Member') }}</a></li>
+            <li><a href="{{ url_for('main.team') }}">{{ _('Team Member') }}</a></li>
             <li><a href="{{ url_for('main.publications') }}">{{ _('Publications') }}</a></li>
             <li><a href="{{ url_for('article.index') }}">{{ _('News Center') }}</a></li>
             <li><a href="#">{{ _('Jobs Offer') }}</a></li>
@@ -52,7 +52,7 @@
         <!-- 中屏幕下导航栏 -->
         <ul class="nav navbar-nav clearfix visible-md visible-sm">
             <li><a href="{{ url_for('main.about_us') }}">{{ _('About Us') }}</a></li>
-            <li><a href="#">{{ _('Team Member') }}</a></li>
+            <li><a href="{{ url_for('main.team') }}">{{ _('Team Member') }}</a></li>
 
 
             <li class="nav-hover">
