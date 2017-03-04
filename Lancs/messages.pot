@@ -1,0 +1,400 @@
+# Translations template for PROJECT.
+# Copyright (C) 2017 ORGANIZATION
+# This file is distributed under the same license as the PROJECT project.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2017.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
+"POT-Creation-Date: 2017-03-04 19:15+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.3.4\n"
+
+#: admin/views.py:18 admin/views.py:30
+msgid "Admin Auth"
+msgstr ""
+
+#: admin/views.py:29 user/views.py:84
+msgid "Invalid username or password."
+msgstr ""
+
+#: admin/views.py:68
+msgid "Articles Admin"
+msgstr ""
+
+#: admin/views.py:76
+msgid "Create Article"
+msgstr ""
+
+#: admin/views.py:124
+msgid "Jobs Admin"
+msgstr ""
+
+#: admin/views.py:132
+msgid "Create Jobs"
+msgstr ""
+
+#: admin/views.py:170
+msgid "Case Admin"
+msgstr ""
+
+#: admin/views.py:178
+msgid "Create Case"
+msgstr ""
+
+#: admin/views.py:232
+msgid "Case Icon"
+msgstr ""
+
+#: article/views.py:15
+msgid "Articles"
+msgstr ""
+
+#: case/views.py:13
+msgid "Project List"
+msgstr ""
+
+#: case/views.py:22
+msgid "Project Display"
+msgstr ""
+
+#: job/views.py:14 templates/navbar.html:11 templates/navbar.html:63
+#: templates/navbar.html:78
+msgid "Jobs Offer"
+msgstr ""
+
+#: main/views.py:14
+msgid "Laboratory of Advanced Networking and Computing Systems"
+msgstr ""
+
+#: main/views.py:21 templates/navbar.html:7 templates/navbar.html:59
+#: templates/navbar.html:69
+msgid "About Us"
+msgstr ""
+
+#: main/views.py:26 templates/main/publications.html:14 templates/navbar.html:9
+#: templates/navbar.html:61 templates/navbar.html:76
+msgid "Publications"
+msgstr ""
+
+#: main/views.py:31
+msgid "Contact Us"
+msgstr ""
+
+#: main/views.py:36 templates/main/team_member.html:13 templates/navbar.html:8
+#: templates/navbar.html:60 templates/navbar.html:70
+msgid "Team Member"
+msgstr ""
+
+#: templates/admin/header.html:7 templates/header.html:7
+msgid "LANCS"
+msgstr ""
+
+#: templates/navbar.html:10 templates/navbar.html:62 templates/navbar.html:77
+msgid "News Center"
+msgstr ""
+
+#: templates/navbar.html:12 templates/navbar.html:64 templates/navbar.html:79
+msgid "Contact"
+msgstr ""
+
+#: templates/navbar.html:37 templates/user/setting.html:9 user/views.py:101
+msgid "Setting"
+msgstr ""
+
+#: templates/navbar.html:40
+msgid "Logout"
+msgstr ""
+
+#: templates/admin/auth.html:26 templates/navbar.html:47
+#: templates/user/reg.html:11 templates/user/signin.html:11
+#: templates/user/signin.html:37
+msgid "Sign In"
+msgstr ""
+
+#: templates/navbar.html:50
+msgid "Sign Up"
+msgstr ""
+
+#: templates/admin/auth.html:6
+msgid "Admin Page"
+msgstr ""
+
+#: templates/admin/auth.html:11 templates/user/reg.html:17
+msgid "Username"
+msgstr ""
+
+#: templates/admin/auth.html:13 templates/user/reg.html:31
+#: templates/user/reg.html:34 templates/user/signin.html:18
+#: templates/user/signin.html:20
+msgid "Email Address"
+msgstr ""
+
+#: templates/admin/auth.html:16 templates/admin/auth.html:19
+#: templates/user/ajax_setting_passwd.html:6 templates/user/reg.html:43
+#: templates/user/signin.html:25 templates/user/signin.html:28
+msgid "Password"
+msgstr ""
+
+#: templates/admin/footer.html:4
+msgid "SYSU SDCS"
+msgstr ""
+
+#: templates/article/index.html:21
+msgid "Views"
+msgstr ""
+
+#: templates/main/about_us.html:14
+msgid "Introduction to Laboratory of Advanced Networking and Computing Systems"
+msgstr ""
+
+#: templates/main/index.html:39
+msgid "Last News"
+msgstr ""
+
+#: templates/main/index.html:42
+msgid "Stay current with industry trends"
+msgstr ""
+
+#: templates/main/index.html:90
+msgid "Researches and Projects"
+msgstr ""
+
+#: templates/main/index.html:93
+msgid "View the detail of projects"
+msgstr ""
+
+#: templates/main/index.html:120
+msgid "More Projects"
+msgstr ""
+
+#: templates/user/ajax_setting_avatar.html:8
+msgid "Avatar"
+msgstr ""
+
+#: templates/user/ajax_setting_avatar.html:28
+#: templates/user/ajax_setting_info.html:40
+#: templates/user/ajax_setting_passwd.html:53
+msgid "Save"
+msgstr ""
+
+#: templates/user/ajax_setting_info.html:6
+msgid "Personal"
+msgstr ""
+
+#: templates/user/ajax_setting_info.html:31
+msgid "Self Description"
+msgstr ""
+
+#: templates/user/ajax_setting_passwd.html:20
+msgid "Current Password"
+msgstr ""
+
+#: templates/user/ajax_setting_passwd.html:30
+msgid "New Password"
+msgstr ""
+
+#: templates/user/ajax_setting_passwd.html:33
+#: templates/user/ajax_setting_passwd.html:42 templates/user/reg.html:48
+#: templates/user/reg.html:58
+msgid "At least 6 characters"
+msgstr ""
+
+#: templates/user/ajax_setting_passwd.html:39
+msgid "Repeat Password"
+msgstr ""
+
+#: templates/user/reg.html:12 templates/user/reg.html:68
+#: templates/user/signin.html:12 templates/user/signin.html:45
+msgid "Registration"
+msgstr ""
+
+#: templates/user/reg.html:20
+msgid "letters,digits,underscore"
+msgstr ""
+
+#: templates/user/reg.html:52
+msgid "Password Again"
+msgstr ""
+
+#: templates/user/reg.html:67
+msgid "Submiting..."
+msgstr ""
+
+#: templates/user/register_email.html:1
+msgid "Dear"
+msgstr ""
+
+#: templates/user/register_email.html:2
+msgid "To confirm your email"
+msgstr ""
+
+#: templates/user/register_email.html:2
+msgid "click here."
+msgstr ""
+
+#: templates/user/register_email.html:3
+msgid ""
+"Alternatively, you can paste the following link in your browser's address"
+" bar:"
+msgstr ""
+
+#: templates/user/register_email.html:5
+msgid "If you have not requested a password reset simply ignore this message."
+msgstr ""
+
+#: templates/user/register_email.html:6
+msgid ""
+"Sincerely, \n"
+" The LANCS Team"
+msgstr ""
+
+#: templates/user/register_email.html:7
+msgid "Note: replies to this email address are not monitored."
+msgstr ""
+
+#: templates/user/register_sent.html:2
+msgid "Register email has been sent"
+msgstr ""
+
+#: templates/user/register_sent.html:6
+msgid "Send confirm email"
+msgstr ""
+
+#: templates/user/register_sent.html:8
+msgid ""
+"We have sent a email to you, with a link which will confirm your mail "
+"address. please see it in time"
+msgstr ""
+
+#: templates/user/setting.html:13
+msgid "Personal Info"
+msgstr ""
+
+#: templates/user/setting.html:18
+msgid "Change Password"
+msgstr ""
+
+#: templates/user/setting.html:23
+msgid "Avatar Setting"
+msgstr ""
+
+#: templates/user/signin.html:42
+msgid "Forget Password"
+msgstr ""
+
+#: templates/user/signin.html:44
+msgid "Have no account?"
+msgstr ""
+
+#: user/views.py:20 user/views.py:40
+msgid "Register Account"
+msgstr ""
+
+#: user/views.py:32
+msgid "Username already exists."
+msgstr ""
+
+#: user/views.py:36
+msgid "Email already exists."
+msgstr ""
+
+#: user/views.py:55
+msgid "Mail has been sent"
+msgstr ""
+
+#: user/views.py:73 user/views.py:85
+msgid "User Sign In"
+msgstr ""
+
+#: user/views.py:116
+msgid "Update info done!"
+msgstr ""
+
+#: user/views.py:143
+msgid "Update avatar done!"
+msgstr ""
+
+#: user/views.py:147 util/file_manage.py:34 util/file_manage.py:89
+msgid "Invalid file"
+msgstr ""
+
+#: user/views.py:175
+msgid "Update password done!"
+msgstr ""
+
+#: util/file_manage.py:20 util/file_manage.py:71
+msgid "No selected file"
+msgstr ""
+
+#: util/time_process.py:24
+msgid "year"
+msgstr ""
+
+#: util/time_process.py:24
+msgid "years"
+msgstr ""
+
+#: util/time_process.py:25
+msgid "month"
+msgstr ""
+
+#: util/time_process.py:25
+msgid "months"
+msgstr ""
+
+#: util/time_process.py:26
+msgid "week"
+msgstr ""
+
+#: util/time_process.py:26
+msgid "weeks"
+msgstr ""
+
+#: util/time_process.py:27
+msgid "day"
+msgstr ""
+
+#: util/time_process.py:27
+msgid "days"
+msgstr ""
+
+#: util/time_process.py:28
+msgid "hour"
+msgstr ""
+
+#: util/time_process.py:28
+msgid "hours"
+msgstr ""
+
+#: util/time_process.py:29
+msgid "minute"
+msgstr ""
+
+#: util/time_process.py:29
+msgid "minutes"
+msgstr ""
+
+#: util/time_process.py:30
+msgid "second"
+msgstr ""
+
+#: util/time_process.py:30
+msgid "seconds"
+msgstr ""
+
+#: util/time_process.py:35
+msgid " ago"
+msgstr ""
+
+#: util/time_process.py:37
+msgid "Just now"
+msgstr ""
+
