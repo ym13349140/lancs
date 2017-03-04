@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50628
 File Encoding         : 65001
 
-Date: 2017-03-04 13:37:00
+Date: 2017-03-04 13:57:34
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -129,11 +129,12 @@ CREATE TABLE `users` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `ix_users_email` (`email`),
   UNIQUE KEY `ix_users_username` (`username`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of users
 -- ----------------------------
-INSERT INTO `users` VALUES ('3', 'asd', 'pbkdf2:sha1:1000$GFC8NICs$4b1da36d48f5a4493779d8f58847d46aa1b8c50e', '503951764@qq.com', '1', '2017-02-28 20:45:34', '2017-02-27 19:12:44', '0', 'http://www.gravatar.com/avatar/');
+INSERT INTO `users` VALUES ('3', 'zouzhp', 'pbkdf2:sha1:1000$GFC8NICs$4b1da36d48f5a4493779d8f58847d46aa1b8c50e', '5039@qq.com', '1', '2017-02-28 20:45:34', '2017-02-27 19:12:44', '0', 'http://www.gravatar.com/avatar/');
 INSERT INTO `users` VALUES ('4', 'test1', 'pbkdf2:sha1:1000$uHnWzH2d$11972b89923b31a00a05141074376a2bd6aa0586', 'test1@qq.com', '1', '2017-03-02 18:32:05', '2017-03-02 18:32:05', '1', 'http://www.gravatar.com/avatar/');
 INSERT INTO `users` VALUES ('5', 'test2', 'pbkdf2:sha1:1000$xBBHxzms$bbdf679cebb937dec5f3eb405cf129c1f2ebf6ff', 'test2@qq.com', '1', '2017-03-02 18:32:29', '2017-03-02 18:32:29', '1', 'http://www.gravatar.com/avatar/');
+INSERT INTO `users` VALUES ('6', 'admin', 'pbkdf2:sha1:1000$ir6YFjYp$559d2f1e87d0ad7040958cbe5ec89bef3785da05', 'admin@qq.com', '1', '2017-03-04 13:51:55', '2017-03-04 13:48:04', '0', 'http://www.gravatar.com/avatar/');

@@ -2,19 +2,19 @@
     <div class="container">
         <div class="navbar-header">
                 <a href="{{ url_for('admin.system') }}" class="navbar-brand" style="font-size: 200%;">
-                    站点管理</a>
+                    系统管理</a>
         </div>
 
         <nav class="collapse navbar-collapse">
             <ul class="nav navbar-nav clearfix hidden-xs" id="nav">
                     <li class="nav-hover">
-                        <a href="#">新闻中心管理</a>
+                        <a href="{{ url_for('admin.article') }}">新闻中心管理</a>
                     </li>
                     <li class="nav-hover">
-                        <a href="#">招聘信息管理</a>
+                        <a href="{{ url_for('admin.job') }}">招聘信息管理</a>
                     </li>
                     <li class="nav-hover">
-                        <a href="#">项目信息管理</a>
+                        <a href="{{ url_for('admin.case') }}">项目信息管理</a>
                     </li>
             </ul>
 
