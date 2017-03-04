@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50628
 File Encoding         : 65001
 
-Date: 2017-03-04 13:57:34
+Date: 2017-03-04 17:01:39
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -26,7 +26,7 @@ CREATE TABLE `alembic_version` (
 -- ----------------------------
 -- Records of alembic_version
 -- ----------------------------
-INSERT INTO `alembic_version` VALUES ('9729a5e6229f');
+INSERT INTO `alembic_version` VALUES ('7c7868c9f819');
 
 -- ----------------------------
 -- Table structure for `articles`
@@ -87,7 +87,7 @@ INSERT INTO `cases` VALUES ('19', '图像连通区域标记并行算法', '图�
 DROP TABLE IF EXISTS `conferences`;
 CREATE TABLE `conferences` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `user_id` int(11) NOT NULL,
+  `user_id` int(11) DEFAULT NULL,
   `name` varchar(128) NOT NULL,
   `contact` varchar(20) NOT NULL,
   `introduction` varchar(256) DEFAULT NULL,
@@ -126,6 +126,7 @@ CREATE TABLE `users` (
   `date_joined` datetime DEFAULT NULL,
   `permissions` int(11) NOT NULL,
   `avatar_url` varchar(128) DEFAULT NULL,
+  `description` varchar(128) DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `ix_users_email` (`email`),
   UNIQUE KEY `ix_users_username` (`username`)
@@ -134,7 +135,7 @@ CREATE TABLE `users` (
 -- ----------------------------
 -- Records of users
 -- ----------------------------
-INSERT INTO `users` VALUES ('3', 'zouzhp', 'pbkdf2:sha1:1000$GFC8NICs$4b1da36d48f5a4493779d8f58847d46aa1b8c50e', '5039@qq.com', '1', '2017-02-28 20:45:34', '2017-02-27 19:12:44', '0', 'http://www.gravatar.com/avatar/');
-INSERT INTO `users` VALUES ('4', 'test1', 'pbkdf2:sha1:1000$uHnWzH2d$11972b89923b31a00a05141074376a2bd6aa0586', 'test1@qq.com', '1', '2017-03-02 18:32:05', '2017-03-02 18:32:05', '1', 'http://www.gravatar.com/avatar/');
-INSERT INTO `users` VALUES ('5', 'test2', 'pbkdf2:sha1:1000$xBBHxzms$bbdf679cebb937dec5f3eb405cf129c1f2ebf6ff', 'test2@qq.com', '1', '2017-03-02 18:32:29', '2017-03-02 18:32:29', '1', 'http://www.gravatar.com/avatar/');
-INSERT INTO `users` VALUES ('6', 'admin', 'pbkdf2:sha1:1000$ir6YFjYp$559d2f1e87d0ad7040958cbe5ec89bef3785da05', 'admin@qq.com', '1', '2017-03-04 13:51:55', '2017-03-04 13:48:04', '0', 'http://www.gravatar.com/avatar/');
+INSERT INTO `users` VALUES ('3', 'zouzhp', 'pbkdf2:sha1:1000$GFC8NICs$4b1da36d48f5a4493779d8f58847d46aa1b8c50e', '5039@qq.com', '1', '2017-02-28 20:45:34', '2017-02-27 19:12:44', '0', 'http://www.gravatar.com/avatar/', null);
+INSERT INTO `users` VALUES ('4', 'test1', 'pbkdf2:sha1:1000$uHnWzH2d$11972b89923b31a00a05141074376a2bd6aa0586', 'test1@qq.com', '1', '2017-03-02 18:32:05', '2017-03-02 18:32:05', '1', 'http://www.gravatar.com/avatar/', null);
+INSERT INTO `users` VALUES ('5', 'test2', 'pbkdf2:sha1:1000$xBBHxzms$bbdf679cebb937dec5f3eb405cf129c1f2ebf6ff', 'test2@qq.com', '1', '2017-03-02 18:32:29', '2017-03-02 18:32:29', '1', 'http://www.gravatar.com/avatar/', null);
+INSERT INTO `users` VALUES ('6', 'admin', 'pbkdf2:sha1:1000$diU25qi5$f475723008bca81e5cafeb7056c965d3c089ac94', 'admin@qq.com', '1', '2017-03-04 17:00:00', '2017-03-04 13:48:04', '0', '6.png?t=1488617985.29', '233333');
