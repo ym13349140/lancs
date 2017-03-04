@@ -1,0 +1,210 @@
+html, body {
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+    word-break: break-all;
+}
+body {
+    overflow-y: auto;
+    background-color: rgb(229,229,229)
+}
+
+.space {
+    margin: 20px;
+}
+
+.material {
+    height: 100%;
+}
+
+.course-container {
+    height: 100%;
+    width: 100%;
+}
+
+.course-player {
+    /*border-bottom:15px solid rgb(74,74,74);*/
+    width: 100%;
+    -height: 100%;
+    margin: 0px;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+ul {
+    list-style-type: none;
+}
+
+ul.accordion {
+    margin-top: 0px;
+}
+
+a {
+    color: #b63b4d;
+    text-decoration: none;
+}
+
+.btn-primary {
+    border-color: #34a263;
+    background-color: #46c37b;
+    color: #fff;
+    margin-left: 10px;
+    margin-top: 10px;
+}
+
+.btn {
+    -webkit-transition: all 0.3s ease;
+    -moz-transition: all 0.3s ease;
+    -o-transition: all 0.3s ease;
+    transition: all 0.3s ease;
+}
+
+/** =======================
+ * Contenedor Principal
+ ===========================*/
+
+h1 a {
+    color: #c12c42;
+    font-size: 16px;
+}
+
+.material .bg-gray {
+    height: 100%;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    padding-right: 10px;
+    position: relative;
+    left: 75%;
+}
+
+.material .row {
+    margin:0;
+    position: fixed;
+}
+
+@media (max-width: 992px) {
+    .material .bg-gray {
+        display: none;
+    }
+
+    .material .row {
+        width: 100%;
+    }
+}
+
+.accordion {
+    width: 100%;
+    min-height: 100%;
+    /*max-width: 360px;*/
+    margin: 0 auto;
+    background: #FFF;
+    border-left: 1px solid gainsboro;
+    border-right: 1px solid gainsboro;
+    word-break: break-all;
+    box-shadow: -2px 0px 3px #ddd,2px 0px 3px #ddd;
+}
+
+.accordion .link {
+    cursor: pointer;
+    display: block;
+    padding: 15px 15px 15px 42px;
+    font-size: 14px;
+    font-weight: 700;
+    border-bottom: 1px solid gainsboro;
+    position: relative;
+    -webkit-transition: all 0.4s ease;
+    -o-transition: all 0.4s ease;
+    transition: all 0.4s ease;
+}
+
+.accordion .link span {
+   display: inline-block;
+    margin-right: 15px;
+}
+
+.accordion li i.glyphicon-tags {
+   display: inline-block;
+}
+
+.accordion li i {
+    position: absolute;
+    top: 16px;
+    left: 12px;
+    font-size: 18px;
+    -webkit-transition: all 0.4s ease;
+    -o-transition: all 0.4s ease;
+    transition: all 0.4s ease;
+}
+
+.accordion li i.glyphicon-chevron-down {
+    display: inline-block;
+    right: 12px;
+    left: auto;
+    font-size: 16px;
+}
+
+.accordion li.open .link {
+    color: #46c37b;
+}
+
+.accordion li.open i {
+    color: #46c37b;
+}
+
+.accordion li.open i.glyphicon-chevron-down {
+    -webkit-transform: rotate(180deg);
+    -ms-transform: rotate(180deg);
+    -o-transform: rotate(180deg);
+    transform: rotate(180deg);
+}
+
+/* 播放按钮的大小 */
+.player-poster[data-poster] .play-wrapper[data-poster]{
+    height: 10% !important;
+}
+
+/*
+ * 子菜单
+ */
+.submenu {
+    display: none;
+    background: white;
+    font-size: 14px;
+    border-bottom: 1px solid gainsboro;
+}
+
+.submenu li {
+    border-radius: 1px;
+}
+
+.submenu a {
+    display: block;
+    text-decoration: none;
+    color: black;
+    padding: 12px;
+    padding-left: 42px;
+    -webkit-transition: all 0.25s ease;
+    -o-transition: all 0.25s ease;
+    transition: all 0.25s ease;
+}
+
+.submenu a.active {
+    background: #46c37b;
+    color: #FFF;
+}
+
+.submenu a:hover {
+    background: #46c37b;
+    color: #FFF;
+}
+.overflow-ellipsis {
+    overflow: hidden;
+    white-space:nowrap;
+    text-overflow:ellipsis;
+}

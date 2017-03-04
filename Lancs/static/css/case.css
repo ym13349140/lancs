@@ -1,0 +1,35 @@
+.content-wrap .container {
+    margin-top: 25px;
+}
+@media (min-width: 1400px) {
+    .container {
+        width: 1360px;
+    }
+}
+
+.case-left-nav{
+    height: 95%;
+    overflow: auto;
+}
+
+.case-right-show{
+    height: 95%;
+}
+
+.case-text{
+    height: 100%;
+    overflow: auto;
+    padding: 10px;
+}
+
+.case-text-panel-heading{
+    border-bottom: solid 1px #F0F0F0;
+}
+
+.case-text-title{
+    font-size: 25px;
+}
+
+.case-code-title-btn{
+    text-align: right;
+}

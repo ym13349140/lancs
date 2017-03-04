@@ -28,6 +28,8 @@ class Config:
     MD_UPLOAD_IMG = 'static/upload/md_images/'
     IMAGES_FOLDER = os.path.join(basedir, 'Lancs/', MD_UPLOAD_IMG)
 
+    CASE_COVER_FOLDER = os.path.join(basedir, 'Lancs/static/upload/case')
+
     @staticmethod
     def init_app(app):
         pass

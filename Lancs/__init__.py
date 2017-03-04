@@ -41,5 +41,7 @@ def create_app(config_name):
     app.register_blueprint(conference_blueprint, url_prefix='/conference')
     from .job import job as job_blueprint
     app.register_blueprint(job_blueprint, url_prefix='/job')
+    from .case import case as case_blueprint
+    app.register_blueprint(case_blueprint, url_prefix='/case')
 
     return app

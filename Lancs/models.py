@@ -62,6 +62,7 @@ class User(UserMixin, db.Model):
 def load_user(user_id):
     return User.query.get(user_id)
 
+
 """ 咨询信息
 @Article: 用来发布站点公告或者一些资讯、新闻信息。
 """
@@ -77,6 +78,20 @@ class Article(db.Model):
 
     updatedTime = db.Column(db.DateTime(), default=datetime.now)
 
+
+""" 项目展示
+@Case：用于管理项目内容
+"""
+
+
+class Case(db.Model):
+    __tablename__ = "cases"
+
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(256), nullable=False)
+    description = db.Column(db.Text(), nullable=False)
+    icon = db.Column(db.String(64), nullable=False)
+    tag = db.Column(db.String(256))   # 案例标签，两个标签之间用分号隔开
 
 """ 会议预约
 @Conference: 会议记录类，用于储存会议基本信息

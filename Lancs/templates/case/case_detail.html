@@ -1,0 +1,88 @@
+{% extends 'base.html' %}
+
+{% block header_ext %}
+    <link href="{{ url_for('static', filename='css/player.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/case.css') }}" rel="stylesheet">
+    <script src="{{ url_for('static', filename='js/simplemde.min.js') }}"></script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/highlight.min.css') }}">
+    <script src="//cdn.bootcss.com/highlight.js/9.9.0/highlight.min.js"></script>
+    <script> hljs.initHighlightingOnLoad();</script>
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <div class="col-md-3">
+            <ul id="accordion" class="accordion">
+                <li data-case_id="{{ case.id }}">
+                    <div class="link">
+                        <i data-id='case-icon2' class="glyphicon glyphicon-tags"></i>
+                        <span data-id="case-name">{{ case.name | truncate(20)}}</span>
+                        <i data-id='case-icon' class="glyphicon glyphicon-chevron-down temp-down"></i>
+                    </div>
+                    <ul class="submenu" style="display: block;">
+                        <li>
+                            <a data-type="case-description" href="javascript:void(0)">项目描述</a>
+                        </li>
+{#                        {% for version in case.versions %}#}
+{#                            <li data-auto_increment="{{ version.id }}">#}
+{#                                <div class="link">#}
+{#                                    <span>{{ version.name }}</span>#}
+{#                                    <i class="glyphicon glyphicon-chevron-down"></i>#}
+{#                                </div>#}
+{#                                <ul class="submenu" style="display: block">#}
+{#                                    <li>#}
+{#                                        <a data-type="version-description" href="javascript:void(0)">优化描述</a>#}
+{#                                    </li>#}
+{#                                    {% for file in version.materials | get_files_list %}#}
+{#                                        <li>#}
+{#                                            <a data-type="code" href="javascript:void(0)">{{ file }}</a>#}
+{#                                        </li>#}
+{#                                    {% endfor %}#}
+{##}
+{#                                </ul>#}
+{#                            </li>#}
+{#                        {% endfor %}#}
+                    </ul>
+                </li>
+            </ul>
+        </div>
+
+        <div class="col-md-9">
+            <div id="case-text" class="panel">
+                <div class="panel-heading case-text-panel-heading">
+                    <span data-id="title" class="case-text-title"></span>
+                </div>
+                <div class="panel-body">
+                    <p class="markdown-body" id="show-description"></p>
+                </div>
+            </div>
+            <div class="panel" id="code-area" style="display: none">
+                <div class="panel-heading case-text-panel-heading case-code-title-btn">
+                    <button class="btn btn-primary" id="mode">编辑代码</button>
+                </div>
+                <div class="panel-body" id="code-viewer">
+                    <pre id="view-code"><code id="viewer"></code></pre>
+                </div>
+                <div class="panel-body" id="code-editor" style="display: none">
+                    <div id="editor" style="z-index: 0">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block footer_ext %}
+    <script type="text/javascript" src="{{ url_for('static', filename='js/markdown_latex_support.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/ace.js') }}" charset="utf-8"></script>
+    <script>
+        var editor = ace.edit("editor");
+        editor.setTheme("ace/theme/tomorrow");
+        var post_to = "{{ url_for('case.show_case', case_id=case.id) }}";
+    </script>
+    <script src="{{ url_for('static', filename='js/case/case_detail.js') }}"></script>
+
+{% endblock %}
+
