@@ -11,7 +11,9 @@
                  <div style="float:right" class="col-md-4"> 邮编：510006 </div>
             </div>
 
-            <div class="about"> 相关链接: <a href="{{ url_for('conference.index') }}">会议室预约</a> </div>
+            <div class="about"> 相关链接:
+                <a href="{{ url_for('admin.system', next=request.path) }}">后台管理</a> /
+                <a href="{{ url_for('conference.index') }}">会议室预约</a> </div>
 
         </div>
     </div>

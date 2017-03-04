@@ -18,6 +18,7 @@ class User(UserMixin, db.Model):
     username = db.Column(db.String(128), unique=True, index=True, nullable=False)
     password_hash = db.Column(db.String(128), nullable=False)
     email = db.Column(db.String(128), unique=True, index=True, nullable=False)
+    description = db.Column(db.String(128))
 
     is_password_reset_link_valid = db.Column(db.Boolean, default=True)
     last_login = db.Column(db.DateTime(), default=datetime.now)

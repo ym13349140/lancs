@@ -1,0 +1,60 @@
+{% block header_ext %}
+    <script src="{{ url_for('static', filename='js/parsley.js') }}"></script>
+{% endblock %}
+
+<div class="panel panel-default panel-col">
+    <div class="panel-heading">{{ _('Password') }}</div>
+    <div class="panel-body">
+
+        {% if message_success %}
+            <div class="text-center alert alert-success alert-dismissible" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span></button>
+                {{ message_success }}</div>
+        {% endif %}
+
+        <form class="form-horizontal" action="{{ url_for('user.setting_password') }}" data-parsley-validate="">
+            <div class="form-group"></div>
+            <div class="form-group">
+                <label class="col-md-offset-1 col-md-2 control-label"
+                       for="old-password">{{ _('Current Password') }}</label>
+                <div class="col-md-7">
+                    <input type="password" id="old-password" name="old-password" class="form-control"
+                           data-parsley-required-message="请输入当前密码" data-parsley-maxlength="128" required="required">
+                </div>
+                {% if message_cur %}
+                    <div class="col-md-offset-3 col-md-12 text-danger">{{ message_cur }}</div>
+                {% endif %}
+            </div>
+            <div class="form-group">
+                <label class="col-md-offset-1 col-md-2 control-label" for="password1">{{ _('New Password') }}</label>
+                <div class="col-md-7">
+                    <input type="password" id="password1" name="password1" class="form-control"
+                           placeholder="{{ _('At least 6 characters') }}" data-parsley-length="[6,128]"
+                           data-parsley-required-message="请输入新的密码" required="required">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-md-offset-1 col-md-2 control-label" for="password2">{{ _('Repeat Password') }}</label>
+                <div class="col-md-7">
+                    <input type="password" id="password2" name="password2" class="form-control"
+                           placeholder="{{ _('At least 6 characters') }}" data-parsley-equalto="#password1"
+                           data-parsley-required-message="请再次输入确认新的密码" data-parsley-length="[6,128]" required="required">
+                </div>
+                {% if message_new %}
+                    <div class="col-md-offset-3 col-md-12 text-danger">{{ message_new }}</div>
+                {% endif %}
+            </div>
+
+
+            <div class="form-group">
+                <div class="col-md-3 col-md-offset-9">
+                    <button type="submit" class="btn btn-primary">{{ _('Save') }}</button>
+                </div>
+            </div>
+
+        </form>
+    </div>
+</div>
+

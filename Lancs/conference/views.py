@@ -13,7 +13,7 @@ from .. import db
 @login_required
 def index():
     if request.method == 'GET':
-        return render_template('conference/index.html')
+        return render_template('conference/index.html', title=u"会议室预约")
 
 
 @conference.route('/process/', methods=['POST'])

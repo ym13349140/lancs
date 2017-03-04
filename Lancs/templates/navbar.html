@@ -27,16 +27,30 @@
     <ul class="navbar-user nav user-nav hidden-xs">
         {% if current_user.is_authenticated %}
         <li>
-            <a href="{{ url_for('user.signout', next=request.path) }}">{{ _('Sign Out') }}</a>
+            <li class="user-avatar-li nav-hover">
+                <a href="javascript:;" class="dropdown-toggle">
+                    <img class="avatar-sm" src="{{ current_user.avatar_url | get_avatar_path}}">
+                </a>
+                <ul class="dropdown-menu" role="menu">
+                    <li role="presentation" class="dropdown-header">{{ current_user.username }}</li>
+                    <li> <a href="{{ url_for('user.setting') }}">
+                        <i class="es-icon es-icon-setting"></i>{{ _('Setting') }}</a>
+                    </li>
+                    <li><a href="{{ url_for('user.signout') }}">
+                        <i class="es-icon es-icon-power"></i>{{ _('Logout') }}</a>
+                    </li>
+                </ul>
+            </li>
         </li>
         {%  else %}
         <li>
             <a href="{{ url_for('user.signin', next=request.path) }}">{{ _('Sign In') }}</a>
         </li>
-        {% endif %}
         <li>
-            <a href="{{ url_for('admin.system', next=request.path) }}">{{ _('Admin') }}</a>
+            <a href="{{ url_for('user.reg', next=request.path) }}">{{ _('Sign Up') }}</a>
         </li>
+        {% endif %}
+
     </ul>
 
     <nav class="collapse navbar-collapse">

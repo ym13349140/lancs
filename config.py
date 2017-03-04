@@ -28,6 +28,10 @@ class Config:
     MD_UPLOAD_IMG = 'static/upload/md_images/'
     IMAGES_FOLDER = os.path.join(basedir, 'Lancs/', MD_UPLOAD_IMG)
 
+    # 用户头像保存的地址
+    AVATAR_PATH = "static/upload/avatar/"
+    AVATAR_FOLDER = os.path.join(basedir, 'Lancs/', AVATAR_PATH)
+
     CASE_COVER_FOLDER = os.path.join(basedir, 'Lancs/static/upload/case')
 
     @staticmethod

@@ -20,4 +20,4 @@ venv/
 Lancs/static/resource/*
 
 # migrations
-migrations/
+# migrations/
