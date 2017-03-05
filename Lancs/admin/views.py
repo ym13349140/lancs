@@ -88,7 +88,7 @@ def article_create():
 def article_edit(aid):
     cur_article = Article.query.filter_by(id=aid).first_or_404()
     if request.method == "GET":
-        return render_template('admin/article/edit.html',
+        return render_template('admin/article/edit_article_info.html',
                                title=cur_article.title,
                                article=cur_article)
     elif request.method == "POST":
@@ -98,7 +98,7 @@ def article_edit(aid):
         cur_article.content = content
         cur_article.updatedTime = datetime.now()
         db.session.commit()
-        return redirect(url_for('admin.article'))
+        return jsonify(status="success")
 
 
 @admin.route('/article/delete/', methods=['POST', 'GET'])
@@ -109,6 +109,32 @@ def article_delete():
     db.session.commit()
     return jsonify(status="success", del_article_id=cur_article.id)
 
+
+@admin.route('/article/<int:article_id>/picture/', methods=['GET', 'POST'])
+@admin_login
+def article_icon(article_id):
+    if request.method == 'GET':
+        cur_article = Article.query.filter_by(id=article_id).first_or_404()
+        return render_template('admin/article/edit_article_icon.html', article=cur_article,
+                               title=gettext('Article Icon'))
+    elif request.method == 'POST':
+        # 上传图片和保存图片
+        cur_article = Article.query.filter_by(id=article_id).first_or_404()
+        icon = request.files['pic']
+
+        file_type = get_file_type(icon.mimetype)
+        if icon and '.' in icon.filename and file_type == 'img':
+            icon_name = '%d.png' % cur_article.id
+            icon_path = os.path.join(current_app.config['ARTICLE_COVER_FOLDER'], icon_name)
+            cur_article.icon = os.path.join('/static/upload/article', '%d.png' % cur_article.id)
+            db.session.commit()
+            status = upload_img(icon, 171, 304, icon_path)
+            if status[0]:
+                return jsonify(status='success')
+            else:
+                return jsonify(status='fail')
+        else:
+            return jsonify(status='file_error')
 
 '''
     招聘信息管理

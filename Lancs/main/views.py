@@ -8,7 +8,7 @@ from ..models import Article, Case
 
 @main.route('/')
 def index():
-    articles = Article.query.order_by(Article.updatedTime.desc()).limit(10).all()
+    articles = Article.query.filter_by(message_type=0).order_by(Article.updatedTime.desc()).limit(6).all()
     cases = Case.query.limit(6).all()
     return render_template("main/index.html",
                            title=gettext('Laboratory of Advanced Networking and Computing Systems'),

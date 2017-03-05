@@ -75,9 +75,8 @@ class Article(db.Model):
     title = db.Column(db.String(128), nullable=False)   # 资讯标题
     content = db.Column(db.Text(), nullable=False)      # 资讯正文
     visitNum = db.Column(db.Integer, default=0)         # 浏览次数
-
+    icon = db.Column(db.String(64), default="/static/upload/article/test.png", nullable=False)
     message_type = db.Column(db.Integer, default=0, nullable=False)  # 消息类型：0代表普通资讯，1代表招聘信息
-
     updatedTime = db.Column(db.DateTime(), default=datetime.now)
 
 

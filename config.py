@@ -33,6 +33,7 @@ class Config:
     AVATAR_FOLDER = os.path.join(basedir, 'Lancs/', AVATAR_PATH)
 
     CASE_COVER_FOLDER = os.path.join(basedir, 'Lancs/static/upload/case')
+    ARTICLE_COVER_FOLDER = os.path.join(basedir, 'Lancs/static/upload/article')
 
     @staticmethod
     def init_app(app):

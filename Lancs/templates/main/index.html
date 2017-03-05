@@ -43,23 +43,23 @@
             </div>
 
             <div class="course-list">
-            <div class="row">
-                {% for case in cases %}
-                <div class="col-lg-4 col-md-4 col-xs-6">
-                    <div class="course-item" style="padding-bottom: 10px; height: 360px; overflow: hidden">
-                        <div class="course-img">
-                            <a href="{{ url_for('case.show_case',case_id=case.id) }}" target="_blank" >
-                                <img src="{{ case.icon }}" alt="{{ case.name }}" class="img-responsive">
-                            </a>
-                        </div>
-                        <div class="course-info">
-                            <div class="title"><strong>{{ case.name }}</strong></div>
-                            <div class="introduction" title="{{ case.introduction }}">{{ case.introduction }}</div>
+                <div class="row">
+                    {% for case in cases %}
+                    <div class="col-lg-4 col-md-4 col-xs-6">
+                        <div class="course-item" style="padding-bottom: 10px; height: 360px; overflow: hidden">
+                            <div class="course-img">
+                                <a href="{{ url_for('case.show_case',case_id=case.id) }}" target="_blank" >
+                                    <img src="{{ case.icon }}" alt="{{ case.name }}" class="img-responsive">
+                                </a>
+                            </div>
+                            <div class="course-info">
+                                <div class="title"><strong>{{ case.name }}</strong></div>
+                                <div class="introduction" title="{{ case.introduction }}">{{ case.introduction }}</div>
+                            </div>
                         </div>
                     </div>
+                    {% endfor %}
                 </div>
-                {% endfor %}
-            </div>
             </div>
         </div>
 
@@ -78,46 +78,32 @@
                 </h5>
                 <div class="subtitle">{{ _('Stay current with industry trends') }}</div>
             </div>
-            <div class="dynamic-section-main row">
-                <div class="col-md-12">
-                    <div class="panel panel-default index-article">
-                        <div class="panel-heading">
-                            <h3 class="panel-title">
-                                最新资讯
-                                <a class="more" href="{{ url_for('article.index') }}"><i class="es-icon es-icon-morehoriz"></i></a>
-                            </h3>
-                        </div>
-                        <div class="panel-body clearfix">
-                            <ul class="index-recommend-aricle clearfix">
-                                <li class="">
-                                    <a href="http://www.nscc-gz.cn/">
-                                        <img class="img-responsive"
-                                             src="{{ url_for('static', filename="images/1.jpg") }}">
-                                        <div class="image-overlay"></div>
-                                        <div class="title">国家超级计算广州中心资讯</div>
-                                    </a>
-                                </li>
-                                <li class="last">
-                                    <a href="http://sdcs.sysu.edu.cn/">
-                                        <img class="img-responsive"
-                                             src="{{ url_for('static', filename="images/2.jpg") }}">
-                                        <div class="image-overlay"></div>
-                                        <div class="title">中山大学数据科学与计算机学院资讯</div>
-                                    </a>
-                                </li>
-                            </ul>
-                            <ul class="index-new-article ">
-                                {% for article in articles %}
-                                    <li class=" clearfix"><i class="es-icon es-icon-dot color-primary mrs"></i>
-                                        <a class="link-dark" href="{{ url_for('article.detail',article_id=article.id) }}" title="{{ article.title }}">{{ article.title }}</a>
-                                        <span class="date">{{ article.updatedTime.year }}-{{ article.updatedTime.month }}-{{ article.updatedTime.day }}</span>
-                                    </li>
-                                {% endfor %}
-                            </ul>
+
+
+            <div class="course-list">
+                <div class="row">
+                    {% for article in articles %}
+                    <div class="col-lg-4 col-md-4 col-xs-6">
+                        <div class="course-item" style="padding-bottom: 10px; height: 360px; overflow: hidden">
+                            <div class="course-img">
+                                <a href="{{ url_for('article.detail',article_id=article.id) }}" target="_blank" >
+                                    <img src="{{ article.icon }}" alt="{{ article.title }}" class="img-responsive">
+                                </a>
+                            </div>
+                            <div class="course-info">
+                                <div class="title"><strong>{{ article.title }}</strong></div>
+                                <div class="introduction"">{{ article.content | truncate(100) }}</div>
+                            </div>
                         </div>
                     </div>
+                    {% endfor %}
                 </div>
             </div>
+        </div>
+        <div class="section-more-btn">
+            <a href="{{ url_for('article.index') }}" class="btn btn-default btn-lg">
+                {{ _('More News') }}<i class="mrs-o es-icon es-icon-chevronright"></i>
+            </a>
         </div>
     </section>
 
