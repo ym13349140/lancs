@@ -33,6 +33,43 @@
         </div>
     </section>
 
+    <section class="course-list-section open-course-list-section ">
+        <div class="container">
+            <div class="text-line">
+                <h5><span>{{ _('Research Direction') }}</span>
+                    <div class="line"></div>
+                </h5>
+                <div class="subtitle">{{ _('View the detail of Researches') }}</div>
+            </div>
+
+            <div class="course-list">
+            <div class="row">
+                {% for case in cases %}
+                <div class="col-lg-4 col-md-4 col-xs-6">
+                    <div class="course-item" style="padding-bottom: 10px; height: 360px;">
+                        <div class="course-img">
+                            <a href="{{ url_for('case.show_case',case_id=case.id) }}" target="_blank" >
+                                <img src="{{ case.icon }}" alt="{{ case.name }}" class="img-responsive">
+                            </a>
+                        </div>
+                        <div class="course-info">
+                            <div class="title"><strong>{{ case.name }}</strong></div>
+                            <div class="introduction" title="{{ case.introduction }}">{{ case.introduction | truncate(120)}}</div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+            </div>
+        </div>
+
+        <div class="section-more-btn">
+            <a href="{{ url_for('case.index') }}" class="btn btn-default btn-lg">
+                {{ _('More Researches') }}<i class="mrs-o es-icon es-icon-chevronright"></i>
+            </a>
+        </div>
+    </section>
+
     <section class="dynamic-section ">
         <div class="container">
             <div class="text-line gray">
@@ -84,43 +121,7 @@
         </div>
     </section>
 
-    <section class="course-list-section open-course-list-section ">
-        <div class="container">
-            <div class="text-line">
-                <h5><span>{{ _('Researches and Projects') }}</span>
-                    <div class="line"></div>
-                </h5>
-                <div class="subtitle">{{ _('View the detail of projects') }}</div>
-            </div>
 
-            <div class="course-list">
-                {% for case in cases %}
-                <div class="col-lg-3 col-md-4 col-xs-6">
-                    <div class="course-item" style="padding-bottom: 10px">
-                        <div class="course-img">
-                            <a href="{{ url_for('case.show_case',case_id=case.id) }}" target="_blank" title="#">
-                                <img src="{{ case.icon }}" alt="{{ case.name }}" class="img-responsive">
-                            </a>
-                        </div>
-                        <div class="course-info">
-                            <div class="title">
-                                <a class="link-dark" href="{{ url_for('case.show_case',case_id=case.id) }}" target="_blank" title="{{ case.name }}">
-                                    <strong>{{ case.name }}</strong>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                {% endfor %}
-            </div>
-        </div>
-        
-        <div class="section-more-btn">
-            <a href="{{ url_for('case.index') }}" class="btn btn-default btn-lg">
-                {{ _('More Projects') }}<i class="mrs-o es-icon es-icon-chevronright"></i>
-            </a>
-        </div>
-    </section>
 
 
 {% endblock %}

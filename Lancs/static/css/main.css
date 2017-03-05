@@ -2372,6 +2372,12 @@ textarea {
     word-wrap: normal;
 }
 
+.course-list .course-item .introduction{
+    padding: 10px 10px;
+    display: block;
+    overflow: hidden;
+}
+
 @media (max-width: 767px) {
     .course-list .course-item .title {
         margin-top: 5px;

@@ -179,8 +179,9 @@ def case_create():
     if request.method == 'POST':
         name = request.form['name']
         tags = request.form['tags']
+        introduction = request.form['introduction']
         description = request.form['description']
-        new_case = Case(name=name, description=description, tag=tags, icon="/static/upload/case/test.png")
+        new_case = Case(name=name, description=description, introduction=introduction, tag=tags, icon="/static/upload/case/test.png")
         db.session.add(new_case)
         db.session.commit()
         # path = os.path.join(current_app.config['CASE_FOLDER'], "%d" % new_case.id)
@@ -207,6 +208,7 @@ def case_edit(case_id):
         cur_case.name = request.form['name']
         cur_case.description = request.form['description']
         cur_case.tag = request.form['tags']
+        cur_case.introduction = request.form['introduction']
         db.session.commit()
         return jsonify(status="success")
 
