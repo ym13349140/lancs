@@ -69,7 +69,7 @@ msgstr "项目展示"
 #: job/views.py:14 templates/navbar.html:11 templates/navbar.html:63
 #: templates/navbar.html:78
 msgid "Jobs Offer"
-msgstr "人才招聘"
+msgstr "加入我们"
 
 #: main/views.py:14
 msgid "Laboratory of Advanced Networking and Computing Systems"
@@ -92,7 +92,7 @@ msgstr "联系我们"
 #: main/views.py:36 templates/main/team_member.html:13 templates/navbar.html:8
 #: templates/navbar.html:60 templates/navbar.html:70
 msgid "Team Member"
-msgstr "团队介绍"
+msgstr "团队成员"
 
 #: templates/admin/header.html:7 templates/header.html:7
 msgid "LANCS"
@@ -100,7 +100,7 @@ msgstr ""
 
 #: templates/navbar.html:10 templates/navbar.html:62 templates/navbar.html:77
 msgid "News Center"
-msgstr "资讯中心"
+msgstr "新闻中心"
 
 #: templates/navbar.html:12 templates/navbar.html:64 templates/navbar.html:79
 msgid "Contact"
