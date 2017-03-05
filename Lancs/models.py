@@ -106,6 +106,6 @@ class Conference(db.Model):
     name = db.Column(db.String(128), nullable=False)    # 预约人姓名
     contact = db.Column(db.String(20), nullable=False)  # 预约人联系电话
     introduction = db.Column(db.String(256), default=None)  # 会议内容简介
-    start_time = db.Column(db.DateTime(), nullable=None)    # 会议开始日期时间
-    end_time = db.Column(db.DateTime(), nullable=None)      # 会议结束时间
+    start_time = db.Column(db.DateTime(), nullable=False)    # 会议开始日期时间
+    end_time = db.Column(db.DateTime(), nullable=False)      # 会议结束时间
 

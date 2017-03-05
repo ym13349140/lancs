@@ -34,15 +34,19 @@ def process():
                             background_color, border_color, text_color, status = '#6AA4C1', '#6AA4C1', '#FFFFFF', u'未开始'
                             if c.start_time <= now < c.end_time:
                                 background_color, border_color, text_color, status = '#46C37B', '#34A263', '#FFFFFF', u'进行中'
-                            elif c.start_time < now:
+                            elif c.end_time < now:
                                 background_color, border_color, text_color, status = '#D1D1D1', '#B0B0B0', '#000000', u'已结束'
 
-                            if current_user.is_authenticated and current_user.id == c.user_id:
+                            if current_user.is_authenticated and current_user.id == c.user_id and current_user.permissions == 1:
                                 background_color, border_color, text_color = '#FFFFA3', '#E1E185', '#797979'
                                 contact = c.contact
                                 title = u'您的预约\n' + title
                                 deletable = 'true'
                                 name = u"您"
+                            elif current_user.is_authenticated and current_user.permissions == 0:
+                                contact = c.contact
+                                if c.start_time > now:
+                                    deletable = 'true'
 
                             conference_jsons.append({'id': c.id, 'title': title, 'start': str(c.start_time),
                                                      'end': str(c.end_time), 'backgroundColor': background_color,
@@ -55,13 +59,24 @@ def process():
                 elif op == 'delete conference':
                     conference_id = request.form.get('conference_id', None)
                     if conference_id:
-                        conference_to_del = Conference.query.filter_by(id=conference_id, user_id=current_user.id).first()
-                        if conference_to_del:
-                            db.session.delete(conference_to_del)
-                            db.session.commit()
-                            return jsonify(status='success')
-                        else:
-                            return jsonify(status='not your conference')
+                        if current_user.is_authenticated:
+                            if current_user.permissions == 1: # 是用户
+                                conference_to_del = Conference.query.filter_by(id=conference_id, user_id=current_user.id).first()
+                                if conference_to_del:
+                                    db.session.delete(conference_to_del)
+                                    db.session.commit()
+                                    return jsonify(status='success')
+                                else:
+                                    return jsonify(status='not your conference')
+                            elif current_user.permissions == 0: # 是管理员
+                                conference_to_del = Conference.query.filter_by(id=conference_id).first()
+                                if conference_to_del:
+                                    db.session.delete(conference_to_del)
+                                    db.session.commit()
+                                    return jsonify(status='success')
+                                else:
+                                    return jsonify(status='no this conference')
+
                     else:
                         return jsonify(status='arguments error')
                 elif op == 'add conference':
@@ -71,7 +86,7 @@ def process():
                     start_time = request.form.get('start_time', None)
                     end_time = request.form.get('end_time', None)
 
-                    if name and contact and introduction and start_time and end_time:
+                    if name and contact and start_time and end_time:
                         try:
                             start_time = datetime.strptime(start_time, '%Y-%m-%d %H:%M')
                             end_time = datetime.strptime(end_time, '%Y-%m-%d %H:%M')

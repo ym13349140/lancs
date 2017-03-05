@@ -93,6 +93,7 @@
             next6Day.setMilliseconds(0);
 
             var conferences = [[],[],[],[],[],[]];
+            var hasChoose = false;
 
             $('#calendar').fullCalendar({
                 height: 730,
@@ -109,6 +110,49 @@
                 minTime: "07:00:00",
                 maxTime: "22:00:00",
                 timeFormat: "H:mm",
+                selectable: true,
+                selectHelper: true,
+                selectOverlap: false,
+                selectAllow: function (selectInfo) {
+                    var start = new Date(selectInfo.start);
+                    var end = new Date(selectInfo.end);
+                    if(start.getUTCDay() != end.getUTCDay()) return false;
+                },
+                select: function( startDate, endDate, allDay, jsEvent, view ){
+                    $("#start_time").val(startDate.format("YYYY-MM-DD HH:mm"));
+                    $("#start_time").trigger("change");
+                    $("#end_time").val(endDate.format("YYYY-MM-DD HH:mm"));
+                    $("#dialog-edit-content").dialog('open');
+                    for(var i=0;i<conferences.length;i++){
+                        var exist_conferences = $('#calendar').fullCalendar('clientEvents', function (event) {
+                            var temp = new Date(event.start + 60*1000*now.getTimezoneOffset());
+                            return temp.getDay() == (tomorrow.getDay() + i) % 7;
+                        });
+                        conferences[i] = exist_conferences.slice();
+                        conferences[i].sort(function (a,b) {
+                            return new Date(a.start) > new Date(b.start);
+                        });
+                    }
+
+                    for(i=0;i<conferences.length;i++){
+                        var temp = [];
+                        if(conferences[i].length > 0 ){
+                            temp.push(conferences[i][0]);
+                            for(var j=1,k=0;j<conferences[i].length;j++){
+                                var cur_end = new Date(temp[k].end);
+                                var next_start = new Date(conferences[i][j].start);
+                                if(cur_end.getTime() == next_start.getTime()){
+                                    temp[k].end = conferences[i][j].end;
+                                }
+                                else{
+                                    temp.push(conferences[i][j]);
+                                    k++;
+                                }
+                            }
+                        }
+                        conferences[i] = temp;
+                    }
+                },
 
                 columnFormat: "M月D号 ddd",
                 titleFormat: "YYYY年 MMM月 D号",
@@ -199,6 +243,9 @@
                                                 }
                                                 else if(data["status"] == "not your conference"){
                                                     alert("该预约非您创建");
+                                                }
+                                                else if(data['status'] == "no this conference"){
+                                                    alert("没有该预约");
                                                 }
                                             }
                                         })
@@ -329,7 +376,7 @@
                     }
                 }
             });
-            var hasChoose = false;
+
             $("#start_time").change(function () {
                 var start_date = new Date($(this).val());
                 start_date = new Date(start_date.getTime() + 5*60*1000);
@@ -353,11 +400,11 @@
 
                 for(var i=0;i<exist_conferences.length;i++){
                     var temp = new Date(exist_conferences[i].start.valueOf() + 60*1000*now.getTimezoneOffset());
-                    if(temp.getUTCDate() == start_date.getUTCDate() && temp > start_date){
+                    if(temp.getDay() == start_date.getDay() && temp > start_date){
                         end_date = temp;
                         break;
                     }
-                    if(temp.getUTCDate() != start_date.getUTCDate() && temp > start_date){
+                    if(temp.getDay() != start_date.getDay() && temp > start_date){
                         break;
                     }
                 }
