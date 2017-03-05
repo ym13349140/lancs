@@ -2375,7 +2375,6 @@ textarea {
 .course-list .course-item .introduction{
     padding: 10px 10px;
     display: block;
-    overflow: hidden;
 }
 
 @media (max-width: 767px) {
