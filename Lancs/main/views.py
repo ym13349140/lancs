@@ -31,11 +31,6 @@ def contact_us():
     return render_template("main/contact_us.html", title=gettext('Contact Us'))
 
 
-@main.route('/team')
-def team():
-    return render_template("main/team_member.html", title=gettext('Team Member'))
-
-
 @main.app_errorhandler(404)
 def page_404(err):
     return render_template('404.html', title='404'), 404

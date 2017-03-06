@@ -5,7 +5,7 @@ from flask_login import login_user, logout_user
 from datetime import datetime
 from ..user.authorize import admin_login
 from . import admin
-from ..models import User, Article, Case
+from ..models import User, Article, Case, Member
 from .. import db
 from flask_babel import gettext
 from ..util.file_manage import upload_img, get_file_type
@@ -44,15 +44,79 @@ def logout():
 def system():
     return render_template("admin/system.html", title=u"站点管理")
 
-"""
-    TODO：如何优雅地使多个url对应同一end_point
-"""
-
 
 @admin.route('/')
 @admin_login
 def index():
     return render_template("admin/system.html", title=u"站点管理")
+
+
+'''
+    团队成员管理：
+    包括团队成员的增删改，主要是图片
+'''
+
+
+@admin.route('/team/')
+@admin_login
+def team():
+    members = Member.query.all()
+    return render_template('admin/team/index.html',
+                           title=u"成员管理",
+                           members=members)
+
+
+@admin.route('/team/create/', methods=['POST', 'GET'])
+@admin_login
+def member_create():
+    if request.method == 'GET':
+        return render_template('admin/team/create.html', title=u"创建成员")
+    if request.method == 'POST':
+        name = request.form['name']
+        web_index = request.form['web_index']
+        new_member = Member(name=name, web_index=web_index)
+        db.session.add(new_member)
+        db.session.commit()
+        return redirect(url_for('admin.team'))
+
+
+@admin.route('/team/<int:member_id>/picture/', methods=['GET', 'POST'])
+@admin_login
+def member_icon(member_id):
+    if request.method == 'GET':
+        cur_member = Member.query.filter_by(id=member_id).first_or_404()
+        return render_template('admin/team/edit_member_icon.html', member=cur_member,
+                               title=u"上传照片")
+    elif request.method == 'POST':
+        # 上传图片和保存图片
+        cur_member = Member.query.filter_by(id=member_id).first_or_404()
+        icon = request.files['pic']
+
+        file_type = get_file_type(icon.mimetype)
+        if icon and '.' in icon.filename and file_type == 'img':
+            icon_name = '%d.png' % cur_member.id
+            icon_path = os.path.join(current_app.config['TEAM_COVER_FOLDER'], icon_name)
+            cur_member.icon = os.path.join('/static/upload/team', '%d.png' % cur_member.id)
+            db.session.commit()
+            status = upload_img(icon, 200, 150, icon_path)
+            if status[0]:
+                return jsonify(status='success')
+            else:
+                return jsonify(status='fail')
+        else:
+            return jsonify(status='file_error')
+
+
+@admin.route('/team/delete/', methods=['POST', 'GET'])
+@admin_login
+def member_delete():
+    cur_member = Member.query.filter_by(id=request.form['id']).first_or_404()
+    icon_path = os.path.join(current_app.config['TEAM_COVER_FOLDER'], '%d.png' % cur_member.id)
+    if os.path.exists(icon_path):
+        os.remove(icon_path)
+    db.session.delete(cur_member)
+    db.session.commit()
+    return jsonify(status="success", del_member_id=cur_member.id)
 
 
 '''
@@ -65,7 +129,7 @@ def index():
 def article():
     articles = Article.query.filter_by(message_type=0)  # 非招聘类资讯
     return render_template('admin/article/index.html',
-                           title=gettext('Articles Admin'),
+                           title=u"新闻管理",
                            articles=articles)
 
 
@@ -73,7 +137,7 @@ def article():
 @admin_login
 def article_create():
     if request.method == 'GET':
-        return render_template('admin/article/create.html', title=gettext('Create Article'))
+        return render_template('admin/article/create.html', title=u"创建新闻")
     if request.method == 'POST':
         title = request.form['title']
         content = request.form['content']
@@ -105,6 +169,9 @@ def article_edit(aid):
 @admin_login
 def article_delete():
     cur_article = Article.query.filter_by(id=request.form['id']).first_or_404()
+    icon_path = os.path.join(current_app.config['ARTICLE_COVER_FOLDER'], '%d.png' % cur_article.id)
+    if os.path.exists(icon_path):
+        os.remove(icon_path)
     db.session.delete(cur_article)
     db.session.commit()
     return jsonify(status="success", del_article_id=cur_article.id)
@@ -116,7 +183,7 @@ def article_icon(article_id):
     if request.method == 'GET':
         cur_article = Article.query.filter_by(id=article_id).first_or_404()
         return render_template('admin/article/edit_article_icon.html', article=cur_article,
-                               title=gettext('Article Icon'))
+                               title=u"新闻封面")
     elif request.method == 'POST':
         # 上传图片和保存图片
         cur_article = Article.query.filter_by(id=article_id).first_or_404()
@@ -147,7 +214,7 @@ def article_icon(article_id):
 def job():
     articles = Article.query.filter_by(message_type=1)  # 招聘类资讯
     return render_template('admin/article/job_index.html',
-                           title=gettext('Jobs Admin'),
+                           title=u"招聘管理",
                            articles=articles)
 
 
@@ -155,7 +222,7 @@ def job():
 @admin_login
 def job_create():
     if request.method == 'GET':
-        return render_template('admin/article/job_create.html', title=gettext('Create Jobs'))
+        return render_template('admin/article/job_create.html', title=u"创建招聘")
     if request.method == 'POST':
         title = request.form['title']
         content = request.form['content']
@@ -193,7 +260,7 @@ def job_edit(aid):
 def case():
     cases = Case.query.all()
     return render_template('admin/case/index.html',
-                           title=gettext('Case Admin'),
+                           title=u"研究方向管理",
                            cases=cases)
 
 
@@ -201,7 +268,7 @@ def case():
 @admin_login
 def case_create():
     if request.method == 'GET':
-        return render_template('admin/case/create.html', title=gettext('Create Case'))
+        return render_template('admin/case/create.html', title=u"创建案例")
     if request.method == 'POST':
         name = request.form['name']
         tags = request.form['tags']
@@ -257,7 +324,7 @@ def case_icon(case_id):
     if request.method == 'GET':
         cur_case = Case.query.filter_by(id=case_id).first_or_404()
         return render_template('admin/case/edit_case_icon.html', case=cur_case,
-                               title=gettext('Case Icon'))
+                               title=u"案例图标")
     elif request.method == 'POST':
         # 上传图片和保存图片
         cur_case = Case.query.filter_by(id=case_id).first_or_404()

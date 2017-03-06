@@ -5,32 +5,33 @@
         <div class="panel panel-default panel-col">
             <div class="panel-heading">
                     <span class="pull-right">
-                        <a id="create-case" href="{{ url_for('admin.case_create') }}" class="btn btn-info btn-sm">
+                        <a id="create-course" href="{{ url_for('admin.member_create') }}" class="btn btn-info btn-sm">
                             <span class="glyphicon glyphicon-plus"></span>
-                            创建案例
+                            创建成员
                         </a>
                     </span>
-                研究方向管理
+                团队成员管理
             </div>
 
             <div class="panel-body">
                 <table class="table fixed-table" id="course-table">
                     <thead>
                     <tr>
-                        <th width="45%">案例名称</th>
-                        <th width="25%">关键词</th>
+                        <th>姓名职位</th>
+                        <th width="50%">个人网址</th>
+
                         <th>操作</th>
                     </tr>
                     </thead>
                     <tbody id="tb">
-                    {% for c in cases %}
-                        <tr data-cid="{{ c.id }}">
-                            <td class="overflow-ellipsis" data-toggle="tooltip" title="{{ c.name }}">{{ c.name }}</td>
-                            <td>{{ c.tag }}</td>
+                    {% for a in members %}
+                        <tr data-cid="{{ a.id }}">
+                            <td>{{ a.name }}</td>
+                            <td class="overflow-ellipsis" data-toggle="tooltip"><a href="{{ a.web_index }}">{{ a.web_index }}</a></td>
                             <td>
-                                <a href="{{ url_for('admin.case_edit', case_id=c.id) }}">管理案例</a>
+                                <a href="{{ url_for('admin.member_icon', member_id=a.id) }}">上传头像</a>
                                 <span class="divider"> | </span>
-                                <a href="{{ url_for('case.show_case',case_id=c.id) }}" target="_blank">预览</a>
+                                <a href="{{ url_for('team.index') }}" target="_blank">预览</a>
                                 <span class="divider"> | </span>
                                 <a href="javascript:void(0)" name="del-btn">删除</a>
                             </td>
@@ -58,8 +59,10 @@
             $("#del-confirm").click(function () {
                 $.ajax({
                     type: "post",
-                    url: "{{ url_for('admin.case_delete') }}",
-                    data: {cid: $(obj).parent().parent().data('cid')},
+                    url: "{{ url_for('admin.member_delete') }}",
+                    data: {
+                        id: $(obj).parent().parent().data('cid')
+                    },
                     success: function (data) {
                         $(obj).parent().parent().remove();
                         $("#del-warning").modal("hide");

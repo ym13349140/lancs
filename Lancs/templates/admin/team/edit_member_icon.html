@@ -11,27 +11,16 @@
     <div class="container" id="content-container">
 
         <div class="row">
-            <div class="col-md-3">
-                <div class="list-group-panel">
-                    <div class="list-group">
-                        <a class="list-group-item" href="{{ url_for('admin.case') }}">返回案例管理页</a>
-                    </div>
-                    <div class="list-group">
-                        <a class="list-group-item edit-info" href="{{url_for('admin.case_edit',case_id=case.id)}}">编辑内容</a>
-                        <a class="list-group-item edit-info active" href="#">管理案例图标</a>
-                    </div>
-                </div>
-            </div>
 
-            <div class="col-md-9">
+            <div class="col-md-12">
                 <div class="panel panel-default panel-col">
-                    <div class="panel-heading">案例图标</div>
+                    <div class="panel-heading">上传成员照片</div>
                     <div class="panel-body">
                         <form id="case-icon-form" method="post" data-parsley-validate="">
 
                             <div class="form-group clearfix">
                                 <div class="col-md-offset-2 col-md-8 controls">
-                                    <img id="case-icon" src="{{ case.icon }}" style="height: 171px;width: 304px;">
+                                    <img id="case-icon" src="{{ member.icon }}" style="height: 200px;width: 150px;">
                                 </div>
                             </div>
 
@@ -67,7 +56,7 @@
                 p_instance.validate();
                 if (p_instance.isValid()) {
                     $.ajax({
-                        url: "{{ url_for('admin.case_icon', case_id=case.id) }}",
+                        url: "{{ url_for('admin.member_icon', member_id=member.id) }}",
                         type: "post",
                         data: new FormData($('#case-icon-form')[0]),
                         cache: false,

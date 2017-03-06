@@ -23,7 +23,7 @@ function delete_tag(e) {
 $(function () {
     /* 提交案例信息 */
     $("#submit-case-info").click(function() {
-        $("textarea")[0].innerHTML = simplemde.value();
+        $("#target-editor")[0].innerHTML = simplemde.value();
         var p_instance = $('#case-info-form').parsley();
         p_instance.validate();
         if (p_instance.isValid()) {

@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+{% block header_ext %}
+    <script src="//cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link href="{{ url_for('static', filename='css/team_member.css') }}" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+
+    <section class="course-list-section open-course-list-section ">
+        <div class="container">
+            <div style="font-size: 36px;" class="text-line">
+                {{ _('Team Member') }}
+            </div>
+
+            <div class="course-list">
+
+                {% for member in members %}
+                    <div class="col-lg-2 col-md-3 col-xs-4">
+                        <div class="course-item" style="padding-bottom: 10px;">
+                            <div class="course-img">
+                                <a href="{{ member.web_index }}" target="_blank" title="{{ member.name }}">
+                                    <img src="{{ member.icon }}" alt="{{ member.name }}" class="img-responsive">
+                                </a>
+                            </div>
+                            <div class="course-info">
+                                <div style="text-align: center; overflow: visible" class="title">
+                                    <a class="link-dark" href="{{ member.web_index }}" target="_blank" title="{{ member.name }}">
+                                        {{ member.name }}
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+
+            </div>
+        </div>
+    </section>
+
+
+{% endblock %}

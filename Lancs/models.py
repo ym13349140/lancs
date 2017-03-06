@@ -64,6 +64,19 @@ def load_user(user_id):
     return User.query.get(user_id)
 
 
+""" 团队成员
+@Member：团队成员照片，以及个人网站地址
+"""
+
+
+class Member(db.Model):
+    __tablename__ = "members"
+    id = db.Column(db.Integer, primary_key=True)        # 成员 ID
+    name = db.Column(db.String(128), nullable=False)    # 成员姓名
+    icon = db.Column(db.String(64), default="/static/upload/team/test.png", nullable=False)    # 成员照片
+    web_index = db.Column(db.String(128), default="http://sdcs.sysu.edu.cn/personnel/teachers")  # 成员个人网站
+
+
 """ 咨询信息
 @Article: 用来发布站点公告或者一些资讯、新闻信息。
 """
