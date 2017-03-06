@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2017-03-04 19:15+0800\n"
+"POT-Creation-Date: 2017-03-06 19:55+0800\n"
 "PO-Revision-Date: 2017-03-04 18:42+0800\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: zh\n"
@@ -26,34 +26,6 @@ msgstr "管理员登录"
 msgid "Invalid username or password."
 msgstr "错误的用户名或者密码"
 
-#: admin/views.py:68
-msgid "Articles Admin"
-msgstr "资讯管理"
-
-#: admin/views.py:76
-msgid "Create Article"
-msgstr "创建资讯"
-
-#: admin/views.py:124
-msgid "Jobs Admin"
-msgstr "招聘管理"
-
-#: admin/views.py:132
-msgid "Create Jobs"
-msgstr "创建招聘"
-
-#: admin/views.py:170
-msgid "Case Admin"
-msgstr "项目管理"
-
-#: admin/views.py:178
-msgid "Create Case"
-msgstr "创建项目"
-
-#: admin/views.py:232
-msgid "Case Icon"
-msgstr "项目图标"
-
 #: article/views.py:15
 msgid "Articles"
 msgstr "资讯"
@@ -66,8 +38,8 @@ msgstr "项目列表"
 msgid "Project Display"
 msgstr "项目展示"
 
-#: job/views.py:14 templates/navbar.html:11 templates/navbar.html:63
-#: templates/navbar.html:78
+#: job/views.py:14 templates/navbar.html:12 templates/navbar.html:65
+#: templates/navbar.html:81
 msgid "Jobs Offer"
 msgstr "加入我们"
 
@@ -75,22 +47,22 @@ msgstr "加入我们"
 msgid "Laboratory of Advanced Networking and Computing Systems"
 msgstr "先进网络与计算系统研究所"
 
-#: main/views.py:21 templates/navbar.html:7 templates/navbar.html:59
-#: templates/navbar.html:69
+#: main/views.py:21 templates/navbar.html:7 templates/navbar.html:60
+#: templates/navbar.html:71
 msgid "About Us"
 msgstr "关于我们"
 
-#: main/views.py:26 templates/main/publications.html:14 templates/navbar.html:9
-#: templates/navbar.html:61 templates/navbar.html:76
-msgid "Publications"
-msgstr "论文著作"
-
-#: main/views.py:31
+#: main/views.py:26
 msgid "Contact Us"
 msgstr "联系我们"
 
-#: main/views.py:36 templates/main/team_member.html:13 templates/navbar.html:8
-#: templates/navbar.html:60 templates/navbar.html:70
+#: paper/views.py:14 templates/navbar.html:10 templates/navbar.html:63
+#: templates/navbar.html:79 templates/paper/index.html:14
+msgid "Publications"
+msgstr "论文著作"
+
+#: team/views.py:13 templates/navbar.html:8 templates/navbar.html:61
+#: templates/navbar.html:72 templates/team/team_member.html:13
 msgid "Team Member"
 msgstr "团队成员"
 
@@ -98,29 +70,33 @@ msgstr "团队成员"
 msgid "LANCS"
 msgstr ""
 
-#: templates/navbar.html:10 templates/navbar.html:62 templates/navbar.html:77
+#: templates/navbar.html:9 templates/navbar.html:62 templates/navbar.html:78
+msgid "Research"
+msgstr "研究方向"
+
+#: templates/navbar.html:11 templates/navbar.html:64 templates/navbar.html:80
 msgid "News Center"
 msgstr "新闻中心"
 
-#: templates/navbar.html:12 templates/navbar.html:64 templates/navbar.html:79
+#: templates/navbar.html:13 templates/navbar.html:66 templates/navbar.html:82
 msgid "Contact"
 msgstr "联系我们"
 
-#: templates/navbar.html:37 templates/user/setting.html:9 user/views.py:101
+#: templates/navbar.html:38 templates/user/setting.html:9 user/views.py:101
 msgid "Setting"
 msgstr "个人设置"
 
-#: templates/navbar.html:40
+#: templates/navbar.html:41
 msgid "Logout"
 msgstr "登出"
 
-#: templates/admin/auth.html:26 templates/navbar.html:47
+#: templates/admin/auth.html:26 templates/navbar.html:48
 #: templates/user/reg.html:11 templates/user/signin.html:11
 #: templates/user/signin.html:37
 msgid "Sign In"
 msgstr "登录"
 
-#: templates/navbar.html:50
+#: templates/navbar.html:51
 msgid "Sign Up"
 msgstr "注册"
 
@@ -157,24 +133,32 @@ msgid "Introduction to Laboratory of Advanced Networking and Computing Systems"
 msgstr "先进网络与计算系统研究所介绍"
 
 #: templates/main/index.html:39
+msgid "Research Direction"
+msgstr "研究方向"
+
+#: templates/main/index.html:42
+msgid "View the detail of Researches"
+msgstr "查看研究方向简介"
+
+#: templates/main/index.html:68
+msgid "More Researches"
+msgstr "更多研究项目"
+
+#: templates/main/index.html:76
 msgid "Last News"
 msgstr "最新资讯"
 
-#: templates/main/index.html:42
+#: templates/main/index.html:79
 msgid "Stay current with industry trends"
 msgstr "了解行业动态"
 
-#: templates/main/index.html:90
-msgid "Researches and Projects"
-msgstr "研究项目"
+#: templates/main/index.html:105
+msgid "More News"
+msgstr "更多新闻"
 
-#: templates/main/index.html:93
-msgid "View the detail of projects"
-msgstr "了解项目详情"
-
-#: templates/main/index.html:120
-msgid "More Projects"
-msgstr "更多研究项目"
+#: templates/main/index.html:114
+msgid "Sponsor Organizations"
+msgstr "研究资助单位"
 
 #: templates/user/ajax_setting_avatar.html:8
 msgid "Avatar"
@@ -398,4 +382,34 @@ msgstr "以前"
 #: util/time_process.py:37
 msgid "Just now"
 msgstr "刚刚"
+
+#~ msgid "Articles Admin"
+#~ msgstr "资讯管理"
+
+#~ msgid "Create Article"
+#~ msgstr "创建资讯"
+
+#~ msgid "Jobs Admin"
+#~ msgstr "招聘管理"
+
+#~ msgid "Create Jobs"
+#~ msgstr "创建招聘"
+
+#~ msgid "Case Admin"
+#~ msgstr "项目管理"
+
+#~ msgid "Create Case"
+#~ msgstr "创建项目"
+
+#~ msgid "Case Icon"
+#~ msgstr "项目图标"
+
+#~ msgid "Researches and Projects"
+#~ msgstr "研究项目"
+
+#~ msgid "View the detail of projects"
+#~ msgstr "了解项目详情"
+
+#~ msgid "More Projects"
+#~ msgstr "更多研究项目"
 
