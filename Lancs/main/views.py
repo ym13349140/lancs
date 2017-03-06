@@ -21,11 +21,6 @@ def about_us():
     return render_template("main/about_us.html", title=gettext('About Us'))
 
 
-@main.route('/publications')
-def publications():
-    return render_template("main/publications.html", title=gettext('Publications'))
-
-
 @main.route('/contact_us')
 def contact_us():
     return render_template("main/contact_us.html", title=gettext('Contact Us'))

@@ -1,13 +1,13 @@
 """empty message
 
-Revision ID: 8baba7458425
+Revision ID: 54791627715a
 Revises: None
-Create Date: 2017-03-04 16:26:45.387000
+Create Date: 2017-03-06 19:48:45.714000
 
 """
 
 # revision identifiers, used by Alembic.
-revision = '8baba7458425'
+revision = '54791627715a'
 down_revision = None
 
 from alembic import op
@@ -21,6 +21,7 @@ def upgrade():
     sa.Column('title', sa.String(length=128), nullable=False),
     sa.Column('content', sa.Text(), nullable=False),
     sa.Column('visitNum', sa.Integer(), nullable=True),
+    sa.Column('icon', sa.String(length=64), nullable=False),
     sa.Column('message_type', sa.Integer(), nullable=False),
     sa.Column('updatedTime', sa.DateTime(), nullable=True),
     sa.PrimaryKeyConstraint('id')
@@ -28,9 +29,24 @@ def upgrade():
     op.create_table('cases',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('name', sa.String(length=256), nullable=False),
+    sa.Column('introduction', sa.String(length=512), nullable=False),
     sa.Column('description', sa.Text(), nullable=False),
     sa.Column('icon', sa.String(length=64), nullable=False),
     sa.Column('tag', sa.String(length=256), nullable=True),
+    sa.PrimaryKeyConstraint('id')
+    )
+    op.create_table('members',
+    sa.Column('id', sa.Integer(), nullable=False),
+    sa.Column('name', sa.String(length=128), nullable=False),
+    sa.Column('icon', sa.String(length=64), nullable=False),
+    sa.Column('web_index', sa.String(length=128), nullable=True),
+    sa.PrimaryKeyConstraint('id')
+    )
+    op.create_table('papers',
+    sa.Column('id', sa.Integer(), nullable=False),
+    sa.Column('title', sa.String(length=512), nullable=False),
+    sa.Column('information', sa.String(length=512), nullable=False),
+    sa.Column('url', sa.String(length=512), nullable=True),
     sa.PrimaryKeyConstraint('id')
     )
     op.create_table('users',
@@ -54,8 +70,8 @@ def upgrade():
     sa.Column('name', sa.String(length=128), nullable=False),
     sa.Column('contact', sa.String(length=20), nullable=False),
     sa.Column('introduction', sa.String(length=256), nullable=True),
-    sa.Column('start_time', sa.DateTime(), ),
-    sa.Column('end_time', sa.DateTime(), ),
+    sa.Column('start_time', sa.DateTime(), nullable=False),
+    sa.Column('end_time', sa.DateTime(), nullable=False),
     sa.ForeignKeyConstraint(['user_id'], ['users.id'], ),
     sa.PrimaryKeyConstraint('id')
     )
@@ -68,6 +84,8 @@ def downgrade():
     op.drop_index(op.f('ix_users_username'), table_name='users')
     op.drop_index(op.f('ix_users_email'), table_name='users')
     op.drop_table('users')
+    op.drop_table('papers')
+    op.drop_table('members')
     op.drop_table('cases')
     op.drop_table('articles')
     ### end Alembic commands ###

@@ -64,6 +64,19 @@ def load_user(user_id):
     return User.query.get(user_id)
 
 
+""" 论文著作
+@Paper：发布的论文条目
+"""
+
+
+class Paper(db.Model):
+    __tablename__ = "papers"
+    id = db.Column(db.Integer, primary_key=True)             # 论文 ID
+    title = db.Column(db.String(512), nullable=False)        # 论文题目
+    information = db.Column(db.String(512), nullable=False)  # 论文信息
+    url = db.Column(db.String(512))                          # 论文链接
+
+
 """ 团队成员
 @Member：团队成员照片，以及个人网站地址
 """
@@ -75,6 +88,7 @@ class Member(db.Model):
     name = db.Column(db.String(128), nullable=False)    # 成员姓名
     icon = db.Column(db.String(64), default="/static/upload/team/test.png", nullable=False)    # 成员照片
     web_index = db.Column(db.String(128), default="http://sdcs.sysu.edu.cn/personnel/teachers")  # 成员个人网站
+
 
 
 """ 咨询信息

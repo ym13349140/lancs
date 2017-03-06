@@ -33,6 +33,8 @@ def create_app(config_name):
     app.register_blueprint(user_blueprint, url_prefix='/user')
     from .team import team as team_blueprint
     app.register_blueprint(team_blueprint, url_prefix='/team')
+    from .paper import paper as paper_blueprint
+    app.register_blueprint(paper_blueprint, url_prefix='/paper')
     from .article import article as article_blueprint
     app.register_blueprint(article_blueprint, url_prefix='/article')
     from .admin import admin as admin_blueprint

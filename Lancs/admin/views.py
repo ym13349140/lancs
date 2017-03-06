@@ -5,7 +5,7 @@ from flask_login import login_user, logout_user
 from datetime import datetime
 from ..user.authorize import admin_login
 from . import admin
-from ..models import User, Article, Case, Member
+from ..models import User, Article, Case, Member, Paper
 from .. import db
 from flask_babel import gettext
 from ..util.file_manage import upload_img, get_file_type
@@ -343,3 +343,57 @@ def case_icon(case_id):
                 return jsonify(status='fail')
         else:
             return jsonify(status='file_error')
+
+
+'''
+    论文管理
+'''
+
+
+@admin.route('/paper/', methods=['GET', 'POST'])
+@admin_login
+def paper():
+    papers = Paper.query.all()
+    return render_template('admin/paper/index.html',
+                           title=u"论文著作管理",
+                           papers=papers)
+
+
+@admin.route('/paper/create/', methods=['POST', 'GET'])
+@admin_login
+def paper_create():
+    if request.method == 'GET':
+        return render_template('admin/paper/create.html', title=u"新建论文")
+    if request.method == 'POST':
+        title = request.form['title']
+        information = request.form['information']
+        new_paper = Paper(title=title, information=information)
+        db.session.add(new_paper)
+        db.session.commit()
+        return redirect(url_for('admin.paper'))
+
+
+@admin.route('/paper/<int:paper_id>/edit/', methods=['POST', 'GET'])
+@admin_login
+def paper_edit(paper_id):
+    cur_paper = Paper.query.filter_by(id=paper_id).first_or_404()
+    if request.method == "GET":
+        return render_template('admin/paper/edit.html',
+                               title=cur_paper.title,
+                               paper=cur_paper)
+    elif request.method == "POST":
+        title = request.form['title']
+        information = request.form['information']
+        cur_paper.title = title
+        cur_paper.information = information
+        db.session.commit()
+        return redirect(url_for('admin.paper'))
+
+
+@admin.route('/paper/delete/', methods=['POST', 'GET'])
+@admin_login
+def paper_delete():
+    cur_paper = Paper.query.filter_by(id=request.form['id']).first_or_404()
+    db.session.delete(cur_paper)
+    db.session.commit()
+    return jsonify(status="success", del_paper_id=cur_paper.id)
