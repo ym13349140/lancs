@@ -4,6 +4,7 @@
         <a href="#" data-toggle="dropdown" class="navbar-more dropdown-toggle">
             <i class="es-icon es-icon-menu"></i></a>
         <ul class="dropdown-menu">
+            <li><a href="{{ url_for('main.index') }}">{{ _('Home') }}</a></li>
             <li><a href="{{ url_for('main.about_us') }}">{{ _('About Us') }}</a></li>
             <li><a href="{{ url_for('team.index') }}">{{ _('Team Member') }}</a></li>
             <li><a href="{{ url_for('case.index') }}">{{ _('Research') }}</a></li>
@@ -43,20 +44,13 @@
                 </ul>
             </li>
         </li>
-        {%  else %}
-        <li>
-            <a href="{{ url_for('user.signin', next=request.path) }}">{{ _('Sign In') }}</a>
-        </li>
-        <li>
-            <a href="{{ url_for('user.reg', next=request.path) }}">{{ _('Sign Up') }}</a>
-        </li>
         {% endif %}
-
     </ul>
 
     <nav class="collapse navbar-collapse">
         <!-- 大屏幕下导航栏 -->
         <ul class="nav navbar-nav clearfix visible-lg">
+            <li><a href="{{ url_for('main.index') }}">{{ _('Home') }}</a></li>
             <li><a href="{{ url_for('main.about_us') }}">{{ _('About Us') }}</a></li>
             <li><a href="{{ url_for('team.index') }}">{{ _('Team Member') }}</a></li>
             <li><a href="{{ url_for('case.index') }}">{{ _('Research') }}</a></li>
@@ -68,13 +62,13 @@
 
         <!-- 中屏幕下导航栏 -->
         <ul class="nav navbar-nav clearfix visible-md visible-sm">
+            <li><a href="{{ url_for('main.index') }}">{{ _('Home') }}</a></li>
             <li><a href="{{ url_for('main.about_us') }}">{{ _('About Us') }}</a></li>
-            <li><a href="{{ url_for('team.index') }}">{{ _('Team Member') }}</a></li>
-
 
             <li class="nav-hover">
                 <a> <i class="es-icon es-icon-morehoriz"></i> </a>
                 <ul class="dropdown-menu" role="menu">
+                    <li><a href="{{ url_for('team.index') }}">{{ _('Team Member') }}</a></li>
                     <li><a href="{{ url_for('case.index') }}">{{ _('Research') }}</a></li>
                     <li><a href="{{ url_for('paper.index') }}">{{ _('Publications') }}</a></li>
                     <li><a href="{{ url_for('article.index') }}">{{ _('News Center') }}</a></li>
