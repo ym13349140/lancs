@@ -24,7 +24,7 @@
                         <th>操作</th>
                     </tr>
                     </thead>
-                    <tbody id="tb">
+                    <tbody class="tb">
                     {% for a in members | principal %}
                         <tr data-cid="{{ a.id }}">
                             <td>{{ a.name }}</td>
@@ -34,7 +34,7 @@
                             </td>
                             <td class="overflow-ellipsis" data-toggle="tooltip"><a href="{{ a.web_index }}">{{ a.web_index }}</a></td>
                             <td>
-                                <a href="{{ url_for('admin.member_icon', member_id=a.id) }}">上传头像</a>
+                                <a href="{{ url_for('admin.member_edit', member_id=a.id) }}">编辑</a>
                                 <span class="divider"> | </span>
                                 <a href="{{ url_for('team.index') }}" target="_blank">预览</a>
                                 <span class="divider"> | </span>
@@ -55,7 +55,7 @@
                         <th>操作</th>
                     </tr>
                     </thead>
-                    <tbody id="tb">
+                    <tbody class="tb">
                     {% for a in members | prof %}
                         <tr data-cid="{{ a.id }}">
                             <td>{{ a.name }}</td>
@@ -65,7 +65,7 @@
                             </td>
                             <td class="overflow-ellipsis" data-toggle="tooltip"><a href="{{ a.web_index }}">{{ a.web_index }}</a></td>
                             <td>
-                                <a href="{{ url_for('admin.member_icon', member_id=a.id) }}">上传头像</a>
+                                <a href="{{ url_for('admin.member_edit', member_id=a.id) }}">编辑</a>
                                 <span class="divider"> | </span>
                                 <a href="{{ url_for('team.index') }}" target="_blank">预览</a>
                                 <span class="divider"> | </span>
@@ -86,7 +86,7 @@
                         <th>操作</th>
                     </tr>
                     </thead>
-                    <tbody id="tb">
+                    <tbody class="tb">
                     {% for a in members | vice_prof %}
                         <tr data-cid="{{ a.id }}">
                             <td>{{ a.name }}</td>
@@ -96,7 +96,7 @@
                             </td>
                             <td class="overflow-ellipsis" data-toggle="tooltip"><a href="{{ a.web_index }}">{{ a.web_index }}</a></td>
                             <td>
-                                <a href="{{ url_for('admin.member_icon', member_id=a.id) }}">上传头像</a>
+                                <a href="{{ url_for('admin.member_edit', member_id=a.id) }}">编辑</a>
                                 <span class="divider"> | </span>
                                 <a href="{{ url_for('team.index') }}" target="_blank">预览</a>
                                 <span class="divider"> | </span>
@@ -117,7 +117,7 @@
                         <th>操作</th>
                     </tr>
                     </thead>
-                    <tbody id="tb">
+                    <tbody class="tb">
                     {% for a in members | teacher %}
                         <tr data-cid="{{ a.id }}">
                             <td>{{ a.name }}</td>
@@ -127,7 +127,7 @@
                             </td>
                             <td class="overflow-ellipsis" data-toggle="tooltip"><a href="{{ a.web_index }}">{{ a.web_index }}</a></td>
                             <td>
-                                <a href="{{ url_for('admin.member_icon', member_id=a.id) }}">上传头像</a>
+                                <a href="{{ url_for('admin.member_edit', member_id=a.id) }}">编辑</a>
                                 <span class="divider"> | </span>
                                 <a href="{{ url_for('team.index') }}" target="_blank">预览</a>
                                 <span class="divider"> | </span>
@@ -148,7 +148,7 @@
                         <th>操作</th>
                     </tr>
                     </thead>
-                    <tbody id="tb">
+                    <tbody class="tb">
                     {% for a in members | researcher %}
                         <tr data-cid="{{ a.id }}">
                             <td>{{ a.name }}</td>
@@ -158,7 +158,7 @@
                             </td>
                             <td class="overflow-ellipsis" data-toggle="tooltip"><a href="{{ a.web_index }}">{{ a.web_index }}</a></td>
                             <td>
-                                <a href="{{ url_for('admin.member_icon', member_id=a.id) }}">上传头像</a>
+                                <a href="{{ url_for('admin.member_edit', member_id=a.id) }}">编辑</a>
                                 <span class="divider"> | </span>
                                 <a href="{{ url_for('team.index') }}" target="_blank">预览</a>
                                 <span class="divider"> | </span>
@@ -180,7 +180,7 @@
     <script type="text/javascript">
         $(document).ready(function () {
             var obj = null;
-            $("#tb").find("a[name=del-btn]").click(function () {
+            $(".tb").find("a[name=del-btn]").click(function () {
                 obj = this;
                 $("#del-warning").modal("show");
             });

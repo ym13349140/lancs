@@ -108,39 +108,104 @@ def member_create():
     if request.method == 'GET':
         return render_template('admin/team/create.html', title=u"创建成员")
     if request.method == 'POST':
+        # 上传图片和保存图片
+        icon = request.files['pic']
         name = request.form['name']
+        rank = request.form['rank']
         web_index = request.form['web_index']
-        new_member = Member(name=name, web_index=web_index)
-        db.session.add(new_member)
-        db.session.commit()
-        return redirect(url_for('admin.team'))
+        description = request.form['description']
+
+        if icon:
+            file_type = get_file_type(icon.mimetype)
+            if '.' in icon.filename and file_type == 'img':
+                new_member = Member(name=name, web_index=web_index, description=description, rank=rank)
+                db.session.add(new_member)
+                db.session.commit()
+                icon_name = '%d.png' % new_member.id
+                icon_path = os.path.join(current_app.config['TEAM_COVER_FOLDER'], icon_name)
+                status = upload_img(icon, 200, 150, icon_path)
+                if status[0]:
+                    new_member.icon = os.path.join('/static/upload/team', '%d.png' % new_member.id)
+                    db.session.commit()
+                    return jsonify(status='success')
+                else:
+                    return jsonify(status='fail')
+            else:
+                return jsonify(status='file_error')
+        else:
+            new_member = Member(name=name, web_index=web_index, description=description, rank=rank)
+            db.session.add(new_member)
+            db.session.commit()
+            return jsonify(status='success')
+
+    # if request.method == 'POST':
+    #     name = request.form['name']
+    #     web_index = request.form['web_index']
+    #     description = request.form['description']
+    #     rank = request.form['rank']
+    #     new_member = Member(name=name, web_index=web_index, description=description, rank=rank)
+    #     db.session.add(new_member)
+    #     db.session.commit()
+    #     return redirect(url_for('admin.team'))
 
 
-@admin.route('/team/<int:member_id>/picture/', methods=['GET', 'POST'])
+@admin.route('/team/edit/<int:member_id>/', methods=['GET', 'POST'])
 @admin_login
-def member_icon(member_id):
+def member_edit(member_id):
     if request.method == 'GET':
         cur_member = Member.query.filter_by(id=member_id).first_or_404()
-        return render_template('admin/team/edit_member_icon.html', member=cur_member,
-                               title=u"上传照片")
-    elif request.method == 'POST':
+        return render_template('admin/team/edit.html', member=cur_member,
+                               title=u"编辑")
+    if request.method == 'POST':
         # 上传图片和保存图片
         cur_member = Member.query.filter_by(id=member_id).first_or_404()
         icon = request.files['pic']
+        name = request.form['name']
+        rank = request.form['rank']
+        web_index = request.form['web_index']
+        description = request.form['description']
 
-        file_type = get_file_type(icon.mimetype)
-        if icon and '.' in icon.filename and file_type == 'img':
-            icon_name = '%d.png' % cur_member.id
-            icon_path = os.path.join(current_app.config['TEAM_COVER_FOLDER'], icon_name)
-            cur_member.icon = os.path.join('/static/upload/team', '%d.png' % cur_member.id)
-            db.session.commit()
-            status = upload_img(icon, 200, 150, icon_path)
-            if status[0]:
-                return jsonify(status='success')
+        if icon:
+            file_type = get_file_type(icon.mimetype)
+            if '.' in icon.filename and file_type == 'img':
+                icon_name = '%d.png' % cur_member.id
+                icon_path = os.path.join(current_app.config['TEAM_COVER_FOLDER'], icon_name)
+                status = upload_img(icon, 200, 150, icon_path)
+                if status[0]:
+                    cur_member.icon = os.path.join('/static/upload/team', '%d.png' % cur_member.id)
+                    cur_member.name = name
+                    cur_member.rank = rank
+                    cur_member.web_index = web_index
+                    cur_member.description = description
+                    db.session.commit()
+                    return jsonify(status='success')
+                else:
+                    return jsonify(status='fail')
             else:
-                return jsonify(status='fail')
+                return jsonify(status='file_error')
         else:
-            return jsonify(status='file_error')
+            cur_member.name = name
+            cur_member.rank = rank
+            cur_member.description = description
+            db.session.commit()
+            return jsonify(status='success')
+
+        # file_type = get_file_type(icon.mimetype)
+        # if icon and '.' in icon.filename and file_type == 'img':
+        #     icon_name = '%d.png' % cur_member.id
+        #     icon_path = os.path.join(current_app.config['TEAM_COVER_FOLDER'], icon_name)
+        #     status = upload_img(icon, 200, 150, icon_path)
+        #     if status[0]:
+        #         cur_member.icon = os.path.join('/static/upload/team', '%d.png' % cur_member.id)
+        #         cur_member.name = name
+        #         cur_member.rank = rank
+        #         cur_member.description = description
+        #         db.session.commit()
+        #         return jsonify(status='success')
+        #     else:
+        #         return jsonify(status='fail')
+        # else:
+        #     return jsonify(status='file_error')
 
 
 @admin.route('/team/delete/', methods=['POST', 'GET'])

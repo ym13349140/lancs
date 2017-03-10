@@ -91,7 +91,7 @@ class Member(db.Model):
     description = db.Column(db.String(64), default="")  # 成员简介，不超过64字
     icon = db.Column(db.String(64), default="/static/upload/team/test.png", nullable=False)      # 成员照片
     web_index = db.Column(db.String(128), default="http://sdcs.sysu.edu.cn/personnel/teachers")  # 成员个人网站
-    rank = db.Column(db.Integer,  nullable=False)    # 0为负责人、1为成员教授、2为成员副教授、3为成员讲师、4为成员专职研究员
+    rank = db.Column(db.Integer,  nullable=False)       # 0为负责人、1为成员教授、2为成员副教授、3为成员讲师、4为成员专职研究员
 
 
 """ 咨询信息
@@ -124,6 +124,7 @@ class Case(db.Model):
     description = db.Column(db.Text(), nullable=False)
     icon = db.Column(db.String(64), nullable=False)
     tag = db.Column(db.String(256))   # 案例标签，两个标签之间用分号隔开
+
 
 """ 会议预约
 @Conference: 会议记录类，用于储存会议基本信息

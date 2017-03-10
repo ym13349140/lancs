@@ -2,17 +2,36 @@
 
 {% block header_ext %}
     <script src="{{ url_for('static', filename='js/parsley.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/parsley-add.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/show_invalid_info.js') }}"></script>
 {% endblock %}
 
 {% block content %}
     <div id="content-container" class="container">
         <div class="panel panel-default">
+            <div class="panel-heading">创建团队成员</div>
             <div class="panel-body">
-                <form action="{{ url_for('admin.member_create') }}" method="POST" data-parsley-validate="">
+                <form id="case-icon-form" method="POST" data-parsley-validate="">
                     <div class="form-group">
-                        <label>姓名职位(如：“吴维刚教授”)</label>
-                        <input type="text" class="form-control" name='name' placeholder="在此输入姓名职位，不超过十个字" style="width: 30%"
-                               data-parsley-maxlength="10" data-parsley-required-message="请输入成员姓名职位" required><br/>
+                        <label>姓名职称(如：“吴维刚教授”)</label>
+                        <input type="text" class="form-control" name='name' placeholder="在此输入姓名职位，不超过10字" style="width: 30%"
+                               data-parsley-maxlength="10" data-parsley-required-message="请输入成员姓名职位" required>
+                        <br/>
+
+                        <label>成员类型:</label>
+                        <select name="rank">
+                            <option value="0">研究所负责人</option>
+                            <option value="1">教授成员</option>
+                            <option value="2">副教授成员</option>
+                            <option value="3">讲师成员</option>
+                            <option value="4">专职研究员</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>个人简介</label>
+                        <input type="text" class="form-control" name='description' placeholder="在此输入个人简介，不超过40字"
+                               data-parsley-maxlength="40" data-parsley-required-message="请输入个人简介"><br/>
                     </div>
 
                     <div class="form-group">
@@ -21,9 +40,28 @@
                                data-parsley-maxlength="256" data-parsley-required-message="请输入个人主页网址" required><br/>
                     </div>
 
-                    <div class="form-submit text-right">
-                        <input class='btn btn-success' id='submit' type='submit'>
+                    <div class="form-group clearfix">
+                        <div class="col-md-8 controls">
+                            <img id="case-icon" src="{{ url_for('static',filename='upload/team/test.png') }}" style="height: 200px;width: 150px;">
+                        </div>
                     </div>
+
+                    <div class="form-group clearfix">
+                        <div class="col-md-8 controls">
+                            <input id="case-icon-field" name="pic" accept="image/bmp,image/jpeg,image/png"
+                                   type="file" data-parsley-required-message="请选择要上传的图片" data-parsley-max-file-size="1024">
+                            <p class="help-block">你可以上传jpg, bmp, png格式的文件，不超过1M</p>
+                        </div>
+                    </div>
+
+                    <div class="form-group clearfix">
+                        <div class="col-md-8 controls">
+                            <button class="btn btn-fat btn-primary" id="upload-icon-btn" type="button">确定
+                            </button>
+                        </div>
+                    </div>
+
+
                 </form>
 
 
@@ -34,5 +72,36 @@
 {% endblock %}
 
 {% block footer_ext %}
+<script type="text/javascript">
+        $(document).ready(function () {
+            $('#case-icon-field').change("#case-icon", preview_picture);
 
+            $('#upload-icon-btn').click(function () {
+                var p_instance = $('#case-icon-form').parsley();
+                p_instance.validate();
+                if (p_instance.isValid()) {
+                    $.ajax({
+                        url: "{{ url_for('admin.member_create') }}",
+                        type: "post",
+                        data: new FormData($('#case-icon-form')[0]),
+                        cache: false,
+                        contentType: false,
+                        processData: false,
+                        success: function (data) {
+                            if (data["status"] == "success") {
+                                alert("创建成功");
+                                window.location = "{{ url_for('admin.team') }}";
+                            }
+                            else if(data.status == "fail"){
+                                alert("上传失败");
+                            }
+                            else {
+                                alert("文件错误")
+                            }
+                        }
+                    });
+                }
+            });
+        });
+    </script>
 {% endblock %}
