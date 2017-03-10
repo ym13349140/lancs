@@ -14,26 +14,53 @@
             </div>
 
             <div class="course-list">
-
-                {% for member in members %}
-                    <div class="col-lg-2 col-md-3 col-xs-4">
-                        <div class="course-item" style="padding-bottom: 10px;">
-                            <div class="course-img">
-                                <a href="{{ member.web_index }}" target="_blank" title="{{ member.name }}">
-                                    <img src="{{ member.icon }}" alt="{{ member.name }}" class="img-responsive">
-                                </a>
-                            </div>
-                            <div class="course-info">
-                                <div style="text-align: center; overflow: visible" class="title">
-                                    <a class="link-dark" href="{{ member.web_index }}" target="_blank" title="{{ member.name }}">
-                                        {{ member.name }}
+                <h3>研究所负责人</h3><br/>
+                <div class="row">
+                    {% for member in members | principal %}
+                        <div class="col-lg-2 col-md-3 col-xs-4">
+                            <div class="course-item" style="padding-bottom: 10px;">
+                                <div class="course-img">
+                                    <a href="{{ member.web_index }}" target="_blank" title="{{ member.name }}">
+                                        <img src="{{ member.icon }}" alt="{{ member.name }}" class="img-responsive">
                                     </a>
+                                </div>
+                                <div class="course-info">
+                                    <div style="text-align: center; overflow: visible" class="title">
+                                        <a class="link-dark" href="{{ member.web_index }}" target="_blank" title="{{ member.name }}">
+                                            {{ member.name }}
+                                        </a>
+                                    </div>
+                                    <div class="introduction"">ACM/AAAS/IEEE Fellow
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                {% endfor %}
+                    {% endfor %}
+                </div>
 
+                <h3>研究所成员</h3><br/>
+                <div class="row">
+                    {% for member in members | common %}
+                        <div class="col-lg-2 col-md-3 col-xs-4">
+                            <div class="course-item" style="padding-bottom: 10px;">
+                                <div class="course-img">
+                                    <a href="{{ member.web_index }}" target="_blank" title="{{ member.name }}">
+                                        <img src="{{ member.icon }}" alt="{{ member.name }}" class="img-responsive">
+                                    </a>
+                                </div>
+                                <div class="course-info">
+                                    <div style="text-align: center; overflow: visible" class="title">
+                                        <a class="link-dark" href="{{ member.web_index }}" target="_blank" title="{{ member.name }}">
+                                            {{ member.name }}
+                                        </a>
+                                    </div>
+                                    <div class="introduction"">ACM/AAAS/IEEE Fellow
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
             </div>
         </div>
     </section>

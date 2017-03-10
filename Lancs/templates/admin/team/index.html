@@ -14,19 +14,24 @@
             </div>
 
             <div class="panel-body">
+                <h3>研究所负责人:</h3>
                 <table class="table fixed-table" id="course-table">
                     <thead>
                     <tr>
                         <th>姓名职位</th>
+                        <th>排序</th>
                         <th width="50%">个人网址</th>
-
                         <th>操作</th>
                     </tr>
                     </thead>
                     <tbody id="tb">
-                    {% for a in members %}
+                    {% for a in members | principal %}
                         <tr data-cid="{{ a.id }}">
                             <td>{{ a.name }}</td>
+                            <td>
+                                <a href="{{ url_for('admin.member_move_up', member_id=a.id) }}">上移</a>
+                                <a href="{{ url_for('admin.member_move_down', member_id=a.id) }}">下移</a>
+                            </td>
                             <td class="overflow-ellipsis" data-toggle="tooltip"><a href="{{ a.web_index }}">{{ a.web_index }}</a></td>
                             <td>
                                 <a href="{{ url_for('admin.member_icon', member_id=a.id) }}">上传头像</a>
@@ -38,7 +43,131 @@
                         </tr>
                     {% endfor %}
                     </tbody>
-                </table>
+                </table><br>
+
+               <h3>成员教授:</h3>
+                <table class="table fixed-table" id="course-table">
+                    <thead>
+                    <tr>
+                        <th>姓名职位</th>
+                        <th>排序</th>
+                        <th width="50%">个人网址</th>
+                        <th>操作</th>
+                    </tr>
+                    </thead>
+                    <tbody id="tb">
+                    {% for a in members | prof %}
+                        <tr data-cid="{{ a.id }}">
+                            <td>{{ a.name }}</td>
+                            <td>
+                                <a href="{{ url_for('admin.member_move_up', member_id=a.id) }}">上移</a>
+                                <a href="{{ url_for('admin.member_move_down', member_id=a.id) }}">下移</a>
+                            </td>
+                            <td class="overflow-ellipsis" data-toggle="tooltip"><a href="{{ a.web_index }}">{{ a.web_index }}</a></td>
+                            <td>
+                                <a href="{{ url_for('admin.member_icon', member_id=a.id) }}">上传头像</a>
+                                <span class="divider"> | </span>
+                                <a href="{{ url_for('team.index') }}" target="_blank">预览</a>
+                                <span class="divider"> | </span>
+                                <a href="javascript:void(0)" name="del-btn">删除</a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table><br>
+
+                <h3>成员副教授:</h3>
+                <table class="table fixed-table" id="course-table">
+                    <thead>
+                    <tr>
+                        <th>姓名职位</th>
+                        <th>排序</th>
+                        <th width="50%">个人网址</th>
+                        <th>操作</th>
+                    </tr>
+                    </thead>
+                    <tbody id="tb">
+                    {% for a in members | vice_prof %}
+                        <tr data-cid="{{ a.id }}">
+                            <td>{{ a.name }}</td>
+                            <td>
+                                <a href="{{ url_for('admin.member_move_up', member_id=a.id) }}">上移</a>
+                                <a href="{{ url_for('admin.member_move_down', member_id=a.id) }}">下移</a>
+                            </td>
+                            <td class="overflow-ellipsis" data-toggle="tooltip"><a href="{{ a.web_index }}">{{ a.web_index }}</a></td>
+                            <td>
+                                <a href="{{ url_for('admin.member_icon', member_id=a.id) }}">上传头像</a>
+                                <span class="divider"> | </span>
+                                <a href="{{ url_for('team.index') }}" target="_blank">预览</a>
+                                <span class="divider"> | </span>
+                                <a href="javascript:void(0)" name="del-btn">删除</a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table><br>
+
+                <h3>成员讲师:</h3>
+                <table class="table fixed-table" id="course-table">
+                    <thead>
+                    <tr>
+                        <th>姓名职位</th>
+                        <th>排序</th>
+                        <th width="50%">个人网址</th>
+                        <th>操作</th>
+                    </tr>
+                    </thead>
+                    <tbody id="tb">
+                    {% for a in members | teacher %}
+                        <tr data-cid="{{ a.id }}">
+                            <td>{{ a.name }}</td>
+                            <td>
+                                <a href="{{ url_for('admin.member_move_up', member_id=a.id) }}">上移</a>
+                                <a href="{{ url_for('admin.member_move_down', member_id=a.id) }}">下移</a>
+                            </td>
+                            <td class="overflow-ellipsis" data-toggle="tooltip"><a href="{{ a.web_index }}">{{ a.web_index }}</a></td>
+                            <td>
+                                <a href="{{ url_for('admin.member_icon', member_id=a.id) }}">上传头像</a>
+                                <span class="divider"> | </span>
+                                <a href="{{ url_for('team.index') }}" target="_blank">预览</a>
+                                <span class="divider"> | </span>
+                                <a href="javascript:void(0)" name="del-btn">删除</a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table><br>
+
+                <h3>专职研究员:</h3>
+                <table class="table fixed-table" id="course-table">
+                    <thead>
+                    <tr>
+                        <th>姓名职位</th>
+                        <th>排序</th>
+                        <th width="50%">个人网址</th>
+                        <th>操作</th>
+                    </tr>
+                    </thead>
+                    <tbody id="tb">
+                    {% for a in members | researcher %}
+                        <tr data-cid="{{ a.id }}">
+                            <td>{{ a.name }}</td>
+                            <td>
+                                <a href="{{ url_for('admin.member_move_up', member_id=a.id) }}">上移</a>
+                                <a href="{{ url_for('admin.member_move_down', member_id=a.id) }}">下移</a>
+                            </td>
+                            <td class="overflow-ellipsis" data-toggle="tooltip"><a href="{{ a.web_index }}">{{ a.web_index }}</a></td>
+                            <td>
+                                <a href="{{ url_for('admin.member_icon', member_id=a.id) }}">上传头像</a>
+                                <span class="divider"> | </span>
+                                <a href="{{ url_for('team.index') }}" target="_blank">预览</a>
+                                <span class="divider"> | </span>
+                                <a href="javascript:void(0)" name="del-btn">删除</a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table><br>
             </div>
         </div>
     </div>

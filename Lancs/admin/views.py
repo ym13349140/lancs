@@ -66,6 +66,42 @@ def team():
                            members=members)
 
 
+@admin.route('/team/up/<int:member_id>')
+@admin_login
+def member_move_up(member_id):
+    cur_member = Member.query.filter_by(id=member_id).first_or_404()
+    des_member_list = Member.query.filter(Member.id < member_id, Member.rank == cur_member.rank).all()
+    if len(des_member_list) != 0:
+        des_member = des_member_list[-1]
+        # 以下通过三次数据库提交来交换两个元组的id
+        temp = des_member.id
+        des_member.id = 100000
+        db.session.commit()
+        cur_member.id, temp = temp, cur_member.id
+        db.session.commit()
+        des_member.id = temp
+        db.session.commit()
+    return redirect(url_for('admin.team'))
+
+
+@admin.route('/team/down/<int:member_id>')
+@admin_login
+def member_move_down(member_id):
+    cur_member = Member.query.filter_by(id=member_id).first_or_404()
+    des_member_list = Member.query.filter(Member.id > member_id, Member.rank == cur_member.rank).all()
+    if len(des_member_list) != 0:
+        des_member = des_member_list[0]
+        # 以下通过三次数据库提交来交换两个元组的id
+        temp = des_member.id
+        des_member.id = 100000
+        db.session.commit()
+        cur_member.id, temp = temp, cur_member.id
+        db.session.commit()
+        des_member.id = temp
+        db.session.commit()
+    return redirect(url_for('admin.team'))
+
+
 @admin.route('/team/create/', methods=['POST', 'GET'])
 @admin_login
 def member_create():

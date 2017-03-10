@@ -1,16 +1,16 @@
 /*
 Navicat MySQL Data Transfer
 
-Source Server         : 222.200.182.75_3306
-Source Server Version : 50554
-Source Host           : 222.200.182.75:3306
+Source Server         : lancs
+Source Server Version : 50628
+Source Host           : localhost:3306
 Source Database       : lancs
 
 Target Server Type    : MYSQL
-Target Server Version : 50554
+Target Server Version : 50628
 File Encoding         : 65001
 
-Date: 2017-03-09 16:13:12
+Date: 2017-03-10 09:38:40
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -26,7 +26,7 @@ CREATE TABLE `alembic_version` (
 -- ----------------------------
 -- Records of alembic_version
 -- ----------------------------
-INSERT INTO `alembic_version` VALUES ('54791627715a');
+INSERT INTO `alembic_version` VALUES ('fb42722c831f');
 
 -- ----------------------------
 -- Table structure for `articles`
@@ -126,31 +126,33 @@ CREATE TABLE `members` (
   `name` varchar(128) NOT NULL,
   `icon` varchar(64) NOT NULL,
   `web_index` varchar(128) DEFAULT NULL,
+  `description` varchar(64) DEFAULT NULL,
+  `rank` int(11) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of members
 -- ----------------------------
-INSERT INTO `members` VALUES ('4', '所长：吴迪教授', '/static/upload/team\\4.png', 'http://sdcs.sysu.edu.cn/node/2525');
-INSERT INTO `members` VALUES ('5', '副所长：卓汉逵副教授', '/static/upload/team\\5.png', 'http://sdcs.sysu.edu.cn/node/2561');
-INSERT INTO `members` VALUES ('6', '陈旭教授', '/static/upload/team\\6.png', 'http://sdcs.sysu.edu.cn/node/2497');
-INSERT INTO `members` VALUES ('7', '林小拉教授', '/static/upload/team/test.png', 'http://sdcs.sysu.edu.cn/node/2506');
-INSERT INTO `members` VALUES ('8', '沈鸿教授', '/static/upload/team/test.png', 'http://sdcs.sysu.edu.cn/node/2459');
-INSERT INTO `members` VALUES ('9', '温武少教授', '/static/upload/team/test.png', 'http://sdcs.sysu.edu.cn/node/2524');
-INSERT INTO `members` VALUES ('10', '吴维刚教授', '/static/upload/team\\10.png', 'http://sdcs.sysu.edu.cn/node/2492');
-INSERT INTO `members` VALUES ('11', '李才伟副教授', '/static/upload/team/test.png', 'http://sdcs.sysu.edu.cn/node/2501');
-INSERT INTO `members` VALUES ('12', '刘聪副教授', '/static/upload/team\\12.png', 'http://sdcs.sysu.edu.cn/node/2543');
-INSERT INTO `members` VALUES ('13', '潘嵘副教授', '/static/upload/team/13.png', 'http://sdcs.sysu.edu.cn/node/2546');
-INSERT INTO `members` VALUES ('14', '桑应朋副教授', '/static/upload/team\\14.png', 'http://sdcs.sysu.edu.cn/node/2474');
-INSERT INTO `members` VALUES ('15', '吴贺俊副教授', '/static/upload/team/test.png', 'http://sdcs.sysu.edu.cn/node/2554');
-INSERT INTO `members` VALUES ('16', '张治国副教授', '/static/upload/team/test.png', 'http://sdcs.sysu.edu.cn/node/2558');
-INSERT INTO `members` VALUES ('17', '周杰英副教授', '/static/upload/team/test.png', 'http://sdcs.sysu.edu.cn/node/2698');
-INSERT INTO `members` VALUES ('18', '张永民', '/static/upload/team/test.png', 'http://sdcs.sysu.edu.cn/node/2564');
-INSERT INTO `members` VALUES ('19', '轩辕哲', '/static/upload/team/test.png', 'http://sdcs.sysu.edu.cn/node/2577');
-INSERT INTO `members` VALUES ('20', '杨晓杏', '/static/upload/team/test.png', 'http://sdcs.sysu.edu.cn/personnel/teachers');
-INSERT INTO `members` VALUES ('21', '易娟', '/static/upload/team/test.png', 'http://sdcs.sysu.edu.cn/personnel/teachers');
-INSERT INTO `members` VALUES ('22', '朱慧灵', '/static/upload/team/test.png', 'http://sdcs.sysu.edu.cn/personnel/teachers');
+INSERT INTO `members` VALUES ('4', '所长：吴迪教授', '/static/upload/team\\4.png', 'http://sdcs.sysu.edu.cn/node/2525', null, '0');
+INSERT INTO `members` VALUES ('5', '副所长：卓汉逵副教授', '/static/upload/team\\5.png', 'http://sdcs.sysu.edu.cn/node/2561', null, '0');
+INSERT INTO `members` VALUES ('6', '林小拉教授', '/static/upload/team/test.png', 'http://sdcs.sysu.edu.cn/node/2506', null, '1');
+INSERT INTO `members` VALUES ('7', '陈旭教授', '/static/upload/team\\6.png', 'http://sdcs.sysu.edu.cn/node/2497', null, '1');
+INSERT INTO `members` VALUES ('8', '沈鸿教授', '/static/upload/team/test.png', 'http://sdcs.sysu.edu.cn/node/2459', null, '1');
+INSERT INTO `members` VALUES ('9', '温武少教授', '/static/upload/team/test.png', 'http://sdcs.sysu.edu.cn/node/2524', null, '1');
+INSERT INTO `members` VALUES ('10', '吴维刚教授', '/static/upload/team\\10.png', 'http://sdcs.sysu.edu.cn/node/2492', null, '1');
+INSERT INTO `members` VALUES ('11', '李才伟副教授', '/static/upload/team/test.png', 'http://sdcs.sysu.edu.cn/node/2501', null, '2');
+INSERT INTO `members` VALUES ('12', '刘聪副教授', '/static/upload/team\\12.png', 'http://sdcs.sysu.edu.cn/node/2543', null, '2');
+INSERT INTO `members` VALUES ('13', '潘嵘副教授', '/static/upload/team/13.png', 'http://sdcs.sysu.edu.cn/node/2546', null, '2');
+INSERT INTO `members` VALUES ('14', '桑应朋副教授', '/static/upload/team\\14.png', 'http://sdcs.sysu.edu.cn/node/2474', null, '2');
+INSERT INTO `members` VALUES ('15', '吴贺俊副教授', '/static/upload/team/test.png', 'http://sdcs.sysu.edu.cn/node/2554', null, '2');
+INSERT INTO `members` VALUES ('16', '张治国副教授', '/static/upload/team/test.png', 'http://sdcs.sysu.edu.cn/node/2558', null, '2');
+INSERT INTO `members` VALUES ('17', '周杰英副教授', '/static/upload/team/test.png', 'http://sdcs.sysu.edu.cn/node/2698', null, '2');
+INSERT INTO `members` VALUES ('18', '张永民', '/static/upload/team/test.png', 'http://sdcs.sysu.edu.cn/node/2564', null, '3');
+INSERT INTO `members` VALUES ('19', '轩辕哲', '/static/upload/team/test.png', 'http://sdcs.sysu.edu.cn/node/2577', null, '3');
+INSERT INTO `members` VALUES ('20', '杨晓杏', '/static/upload/team/test.png', 'http://sdcs.sysu.edu.cn/personnel/teachers', null, '4');
+INSERT INTO `members` VALUES ('21', '易娟', '/static/upload/team/test.png', 'http://sdcs.sysu.edu.cn/personnel/teachers', null, '4');
+INSERT INTO `members` VALUES ('22', '朱慧灵', '/static/upload/team/test.png', 'http://sdcs.sysu.edu.cn/personnel/teachers', null, '4');
 
 -- ----------------------------
 -- Table structure for `papers`

@@ -79,16 +79,19 @@ class Paper(db.Model):
 
 """ 团队成员
 @Member：团队成员照片，以及个人网站地址
+
+通过交换主键来达到互换顺序的目的，把100000设置为临时交换id，分3次提交来达到交换主键的目的
 """
 
 
 class Member(db.Model):
     __tablename__ = "members"
     id = db.Column(db.Integer, primary_key=True)        # 成员 ID
-    name = db.Column(db.String(128), nullable=False)    # 成员姓名
-    icon = db.Column(db.String(64), default="/static/upload/team/test.png", nullable=False)    # 成员照片
+    name = db.Column(db.String(128), nullable=False)    # 成员姓名职务
+    description = db.Column(db.String(64), default="")  # 成员简介，不超过64字
+    icon = db.Column(db.String(64), default="/static/upload/team/test.png", nullable=False)      # 成员照片
     web_index = db.Column(db.String(128), default="http://sdcs.sysu.edu.cn/personnel/teachers")  # 成员个人网站
-
+    rank = db.Column(db.Integer,  nullable=False)    # 0为负责人、1为成员教授、2为成员副教授、3为成员讲师、4为成员专职研究员
 
 
 """ 咨询信息

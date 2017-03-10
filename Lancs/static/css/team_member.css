@@ -5,3 +5,11 @@
     border-top-right-radius: 4px;
     height: 200px;
 }
+
+.course-list .course-item .introduction{
+    padding: 10px 10px;
+    display: block;
+    text-align: center;
+    overflow: hidden;
+    height: 70px;
+}
