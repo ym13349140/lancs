@@ -52,6 +52,25 @@ def index():
 
 
 '''
+    编辑研究所简介
+'''
+
+
+@admin.route('/about_us/', methods=['POST', 'GET'])
+@admin_login
+def about_us():
+    if request.method == 'GET':
+        intro = Article.query.filter_by(message_type=513).first_or_404()
+        return render_template('admin/about_us/edit.html', title=u'研究所简介编辑', intro=intro)
+    if request.method == 'POST':
+        intro = Article.query.filter_by(message_type=513).first_or_404()
+        intro.title = request.form['title']
+        intro.content = request.form['content']
+        db.session.commit()
+        return redirect(url_for('admin.index'))
+
+
+'''
     团队成员管理：
     包括团队成员的增删改，主要是图片
 '''

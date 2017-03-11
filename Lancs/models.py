@@ -106,7 +106,7 @@ class Article(db.Model):
     content = db.Column(db.Text(), nullable=False)      # 资讯正文
     visitNum = db.Column(db.Integer, default=0)         # 浏览次数
     icon = db.Column(db.String(64), default="/static/upload/article/test.png", nullable=False)
-    message_type = db.Column(db.Integer, default=0, nullable=False)  # 消息类型：0代表普通资讯，1代表招聘信息
+    message_type = db.Column(db.Integer, default=0, nullable=False)  # 消息类型：0代表普通资讯，1代表招聘信息, 513代表研究所简介
     updatedTime = db.Column(db.DateTime(), default=datetime.now)
 
 

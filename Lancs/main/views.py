@@ -18,7 +18,8 @@ def index():
 
 @main.route('/about_us')
 def about_us():
-    return render_template("main/about_us.html", title=gettext('About Us'))
+    intro = Article.query.filter_by(message_type=513).first_or_404()
+    return render_template("main/about_us.html", intro=intro, title=gettext('About Us'))
 
 
 @main.route('/contact_us')
