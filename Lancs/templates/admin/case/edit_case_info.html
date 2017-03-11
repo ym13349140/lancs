@@ -4,6 +4,7 @@
     <link href="{{ url_for('static', filename='css/simplemde.min.css') }}" rel="stylesheet">
     <script src="{{ url_for('static', filename='js/simplemde.min.js') }}"></script>
     <script src="{{ url_for('static', filename='js/parsley.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/show_invalid_info.js') }}"></script>
 {% endblock %}
 
 {% block content %}
@@ -16,7 +17,6 @@
                     </div>
                     <div class="list-group">
                         <a class="list-group-item edit-info active" href="#">编辑基本信息</a>
-                        <a class="list-group-item edit-info" href="{{ url_for('admin.case_icon',case_id=case.id) }}">管理案例图标</a>
                     </div>
                 </div>
             </div>
@@ -34,6 +34,19 @@
                                 <label>案例简介</label>
                                 <textarea rows="3" class="form-control" name='introduction' placeholder="在此输入简介，不超过100字"
                                        data-parsley-required-message="请输入案例简介" data-parsley-maxlength="100" required>{{ case.introduction }}</textarea>
+                                <br>
+                            </div>
+                            <div class="form-group">
+                                <label>案例图标</label>
+                                <div class="form-controls">
+                                    <img id="case-icon" src="{{ case.icon }}" style="height: 171px;width: 304px;">
+                                </div>
+                                <br>
+                                <div class="controls">
+                                    <input id="case-icon-field" name="pic" accept="image/bmp,image/jpeg,image/png"
+                                           type="file" data-parsley-required-message="请选择要上传的图片" data-parsley-max-file-size="1024" required>
+                                    <p class="help-block">你可以上传jpg, bmp, png格式的文件，不超过1M</p>
+                                </div>
                                 <br>
                             </div>
                             <div class="form-group">
@@ -70,7 +83,7 @@
                                     <button type="button" class="close" aria-label="Close">
                                         <span aria-hidden="true">&times;</span>
                                     </button>
-                                    <span class="case-edit-status-info"></span>
+                                    <span class="case-edit-status-info">{% if msg %}{{ msg }}{% endif %}</span>
                                 </div>
                             </div>
                             <div class="form-group">

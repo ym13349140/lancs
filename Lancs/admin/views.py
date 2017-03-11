@@ -394,12 +394,33 @@ def case_create():
         tags = request.form['tags']
         introduction = request.form['introduction']
         description = request.form['description']
+        icon = request.files['pic']
         new_case = Case(name=name, description=description, introduction=introduction, tag=tags, icon="/static/upload/case/test.png")
         db.session.add(new_case)
         db.session.commit()
+        file_type = get_file_type(icon.mimetype)
+        if icon and '.' in icon.filename and file_type == 'img':
+            icon_name = '%d.png' % new_case.id
+            icon_path = os.path.join(current_app.config['CASE_COVER_FOLDER'], icon_name)
+            new_case.icon = os.path.join('/static/upload/case', '%d.png' % new_case.id)
+            db.session.commit()
+            status = upload_img(icon, 171, 304, icon_path)
+            if status[0]:
+                return redirect(url_for('admin.case'))
+            else:
+                return render_template('admin/case/edit_case_info.html',
+                                       title=new_case.name,
+                                       case=new_case,
+                                       tags=new_case.tag.split(";"),
+                                       msg=u"图片保存失败")
+        else:
+            return render_template('admin/case/edit_case_info.html',
+                                   title=new_case.name,
+                                   case=new_case,
+                                   tags=new_case.tag.split(";"),
+                                   msg=u"图片文件错误")
         # path = os.path.join(current_app.config['CASE_FOLDER'], "%d" % new_case.id)
         # os.mkdir(path)
-        return redirect(url_for('admin.case'))
 
 
 @admin.route('/case/<int:case_id>/edit/', methods=['POST', 'GET'])
@@ -423,33 +444,7 @@ def case_edit(case_id):
         cur_case.tag = request.form['tags']
         cur_case.introduction = request.form['introduction']
         db.session.commit()
-        return jsonify(status="success")
-
-
-@admin.route('/case/delete/', methods=['POST', 'GET'])
-@admin_login
-def case_delete():
-    cur_case = Case.query.filter_by(id=request.form['cid']).first_or_404()
-    icon_path = os.path.join(current_app.config['CASE_COVER_FOLDER'], '%d.png' % cur_case.id)
-    if os.path.exists(icon_path):
-        os.remove(icon_path)
-    db.session.delete(cur_case)
-    db.session.commit()
-    return jsonify(status='success', del_case_id=cur_case.id)
-
-
-@admin.route('/case/<int:case_id>/picture/', methods=['GET', 'POST'])
-@admin_login
-def case_icon(case_id):
-    if request.method == 'GET':
-        cur_case = Case.query.filter_by(id=case_id).first_or_404()
-        return render_template('admin/case/edit_case_icon.html', case=cur_case,
-                               title=u"案例图标")
-    elif request.method == 'POST':
-        # 上传图片和保存图片
-        cur_case = Case.query.filter_by(id=case_id).first_or_404()
         icon = request.files['pic']
-
         file_type = get_file_type(icon.mimetype)
         if icon and '.' in icon.filename and file_type == 'img':
             icon_name = '%d.png' % cur_case.id
@@ -463,6 +458,18 @@ def case_icon(case_id):
                 return jsonify(status='fail')
         else:
             return jsonify(status='file_error')
+
+
+@admin.route('/case/delete/', methods=['POST', 'GET'])
+@admin_login
+def case_delete():
+    cur_case = Case.query.filter_by(id=request.form['cid']).first_or_404()
+    icon_path = os.path.join(current_app.config['CASE_COVER_FOLDER'], '%d.png' % cur_case.id)
+    if os.path.exists(icon_path):
+        os.remove(icon_path)
+    db.session.delete(cur_case)
+    db.session.commit()
+    return jsonify(status='success', del_case_id=cur_case.id)
 
 
 '''

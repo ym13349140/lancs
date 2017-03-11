@@ -39,9 +39,13 @@ $(function () {
                         $("#case-edit-status").removeClass("hide");
                         $("#case-edit-status .case-edit-status-info")[0].innerHTML = "修改成功";
                     }
+                    else if (data["status"] == "fail") {
+                        $("#case-edit-status").removeClass("hide");
+                        $("#case-edit-status .case-edit-status-info")[0].innerHTML = "图片保存失败";
+                    }
                     else {
                         $("#case-edit-status").removeClass("hide");
-                        $("#case-edit-status .case-edit-status-info")[0].innerHTML = "修改失败";
+                        $("#case-edit-status .case-edit-status-info")[0].innerHTML = "文件格式错误";
                     }
                 }
             });
@@ -51,6 +55,8 @@ $(function () {
     $("#case-edit-status .close").click(function() {
         $("#case-edit-status").addClass("hide");
     });
+
+    $('#case-icon-field').change("#case-icon", preview_picture);
 
     $("#add-tag-btn").click(function () {
         var tag = $(".case-tags")[0].value;
