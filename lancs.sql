@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50628
 File Encoding         : 65001
 
-Date: 2017-03-10 09:38:40
+Date: 2017-03-10 18:36:33
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -129,14 +129,14 @@ CREATE TABLE `members` (
   `description` varchar(64) DEFAULT NULL,
   `rank` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of members
 -- ----------------------------
 INSERT INTO `members` VALUES ('4', '所长：吴迪教授', '/static/upload/team\\4.png', 'http://sdcs.sysu.edu.cn/node/2525', null, '0');
 INSERT INTO `members` VALUES ('5', '副所长：卓汉逵副教授', '/static/upload/team\\5.png', 'http://sdcs.sysu.edu.cn/node/2561', null, '0');
-INSERT INTO `members` VALUES ('6', '林小拉教授', '/static/upload/team/test.png', 'http://sdcs.sysu.edu.cn/node/2506', null, '1');
+INSERT INTO `members` VALUES ('6', '林小拉教授', '/static/upload/team\\6.png', 'http://sdcs.sysu.edu.cn/node/2506', 'None', '1');
 INSERT INTO `members` VALUES ('7', '陈旭教授', '/static/upload/team\\6.png', 'http://sdcs.sysu.edu.cn/node/2497', null, '1');
 INSERT INTO `members` VALUES ('8', '沈鸿教授', '/static/upload/team/test.png', 'http://sdcs.sysu.edu.cn/node/2459', null, '1');
 INSERT INTO `members` VALUES ('9', '温武少教授', '/static/upload/team/test.png', 'http://sdcs.sysu.edu.cn/node/2524', null, '1');

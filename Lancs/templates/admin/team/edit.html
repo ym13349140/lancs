@@ -94,7 +94,7 @@
                         success: function (data) {
                             if (data["status"] == "success") {
                                 alert("修改成功");
-                                location.reload();
+                                window.location.href = "{{ url_for('admin.team') }}";
                             }
                             else if(data.status == "fail"){
                                 alert("上传失败");
